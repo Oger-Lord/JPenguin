@@ -1,0 +1,9 @@
+<?xml  version='1.0' encoding='UTF-8'?>
+<de.jpenguin.type.basics.TypeList savable_versions='0'>
+ <myclass attackSpeed='0.0' class='de.jpenguin.type.AbilityType' life='0.0' movementSpeed='0.0' savable_versions='0, 0' size='0.0' typeId=''/>
+<instances size='3'>
+      <de.jpenguin.type.AbilityType name='Move' description='Order your units to move to a target area.' orderId='de.jpenguin.unit.abilities.Move' icon='Textures/Icons/Abilitys/move.png' manaCosts='' cooldown='' position='0' target='1' typeId='move'/>
+      <de.jpenguin.type.AbilityType name='Stop' description='Order your units to stop whatever order they were previously given.' orderId='de.jpenguin.unit.abilities.Stop' icon='Textures/Icons/Abilitys/stop.png' manaCosts='' cooldown='' position='1' target='0' typeId='stop'/>
+      <de.jpenguin.type.AbilityType name='Attack' description='Order your units to attack the target unit.' orderId='de.jpenguin.unit.abilities.Attack' icon='Textures/Icons/Abilitys/attack.png' manaCosts='' cooldown='' position='3' target='2' typeId='attack'/>
+ </instances>
+</de.jpenguin.type.basics.TypeList>

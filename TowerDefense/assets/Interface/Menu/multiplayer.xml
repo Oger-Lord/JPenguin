@@ -1,0 +1,51 @@
+<nifty>
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+	
+  </style>
+
+
+  <screen id="multiplayer" controller="de.jpenguin.menu.Multiplayer">
+    <layer id="layer" backgroundColor="#0000" childLayout="center">
+
+
+      <panel id="menu" height="150" width="50%" valign="center" backgroundColor="#222222" childLayout="vertical" visibleToMouse="true">
+	
+	<panel childLayout="horizontal" height="5%" />
+
+	<panel id="menu2" height="45%" width="95%" valign="center" align="center" childLayout="vertical">
+		<text id="labelName" text="Enter IP Adress" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+		<control name="textfield" maxLength="20"/>
+	</panel>
+
+	<panel childLayout="horizontal" height="5%" />
+
+	<panel id="menu2" height="45%" width="100%" valign="center" childLayout="horizontal">
+		<panel childLayout="horizontal" width="2%" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Back"  align="center" width="30%" height="90%">
+                    	<interact onClick="back()" />
+                </control>
+
+		<panel childLayout="horizontal" width="2%" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Host Game"  align="center" width="30%" height="90%">
+                    	<interact onClick="host()" />
+                </control>
+
+		<panel childLayout="horizontal" width="2%" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Join"  align="center" width="30%" height="90%">
+                    	<interact onClick="join()" />
+                </control>
+	</panel>
+
+      </panel>
+
+
+    </layer>
+  </screen>
+</nifty>

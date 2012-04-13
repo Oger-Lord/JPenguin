@@ -1,0 +1,4 @@
+<?xml  version='1.0' encoding='UTF-8'?>
+<com.jme3.light.AmbientLight format_version='2' savable_versions='0, 0'>
+    <color a='0.5' b='0.4862745' class='com.jme3.math.ColorRGBA' g='0.9607843' r='0.9490196' savable_versions='0'/>
+</com.jme3.light.AmbientLight>

@@ -1,0 +1,10 @@
+model
+size
+colorRed
+colorGreen
+colorBlue
+rotation
+rotationB
+rotationC
+height
+pathingSize

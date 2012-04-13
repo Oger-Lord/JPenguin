@@ -1,0 +1,19 @@
+#jME3 AppSettings
+#Mon Mar 26 17:04:52 CEST 2012
+Width(int)=1366
+StencilBits(int)=0
+BitsPerPixel(int)=24
+Name(string)=YourName
+DepthBits(int)=24
+Renderer(string)=LWJGL-OpenGL2
+VSync(bool)=false
+DisableJoysticks(bool)=true
+Frequency(int)=60
+AudioRenderer(string)=LWJGL
+Height(int)=768
+Fullscreen(bool)=false
+UseInput(bool)=true
+Title(string)=Test
+FrameRate(int)=50
+Samples(int)=0
+SettingsDialogImage(string)=/com/jme3/app/Monkey.png

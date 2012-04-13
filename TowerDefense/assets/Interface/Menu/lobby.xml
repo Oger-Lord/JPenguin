@@ -1,0 +1,96 @@
+<nifty>
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+  </style>
+
+
+  <screen id="lobby" controller="de.jpenguin.menu.Lobby">
+    <layer id="layer" backgroundColor="#0000" childLayout="center">
+
+
+      <panel id="menu" height="80%" width="80%" align="center" valign="center" backgroundColor="#222222" childLayout="horizontal" visibleToMouse="true">
+	
+
+		<panel id="menu22" height="100%" width="75%" valign="center" align="center" childLayout="vertical">
+		
+			<panel childLayout="horizontal" height="10px" />
+
+			<panel id="menu22" height="65%" width="100%" valign="center" align="center" childLayout="vertical">
+
+				<panel id="slot0" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot1" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot2" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot3" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot4" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot5" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot6" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot7" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot8" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot9" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot10" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+				<panel id="slot11" childLayout="horizontal" width="95%" height="30px" align="center" valign="center" />
+			
+			</panel>
+
+			<panel childLayout="horizontal" height="10px" />
+
+			<control id="myListBox" name="listBox" height="30%" width="95%" vertical="on" horizontal="off" displayItems="6" selection="Single" align="center" />
+
+			<panel id="menu2" height="10%" width="95%" valign="center" align="center" childLayout="horizontal">
+				<control name="textfield" maxLength="20" align="center" valign="center" width="95%" />
+
+
+				<control id="Menu" name="button" backgroundColor="#0000" label="Send" focusable="false" width="5%" height="50%"  valign="center">
+                    			<interact onClick="chat()" />
+                		</control>
+			</panel>
+
+		</panel>
+
+
+		<panel childLayout="vertical" width="5px" />
+
+
+
+		<panel id="menu22" height="100%" width="25%" childLayout="vertical">
+
+			<panel childLayout="horizontal" height="5px" />
+
+			<panel height="85%" width="95%" align="center" childLayout="vertical">
+
+				<image id="mappreview" filename="Interface/IngameGui/empty.png" height="256" width="256" align="center" ></image>
+
+				<text id="labelunitname" text="Descriptionbla" width="256" height="128" align="center"   style="my"/>
+
+			</panel>
+
+				
+			<panel id="menu2" height="10%" width="95%" valign="center" childLayout="horizontal">
+
+				<panel childLayout="horizontal" width="5%" />
+
+				<control id="Menu" name="button" backgroundColor="#0000" label="Back" focusable="false" align="center" width="42%" height="90%">
+                    			<interact onClick="back()" />
+                		</control>
+
+				<panel childLayout="horizontal" width="6%" />
+
+				<control id="Menu" name="button" backgroundColor="#0000" label="Start Game" focusable="false" align="center" width="42%" height="90%">
+                    			<interact onClick="startGame()" />
+                		</control>
+			</panel>
+
+		</panel>
+
+
+
+		
+      </panel>
+
+
+    </layer>
+  </screen>
+</nifty>

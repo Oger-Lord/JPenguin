@@ -1,0 +1,7 @@
+<?xml  version='1.0' encoding='UTF-8'?>
+<de.jpenguin.type.basics.TypeList savable_versions='0'>
+ <myclass attackSpeed='0.0' class='de.jpenguin.type.MissileType' life='0.0' movementSpeed='0.0' savable_versions='0, 0' size='0.0' typeId=''/>
+<instances size='1'>
+      <de.jpenguin.type.MissileType model='Models/SpaceCraft/Rocket.j3o' speed='8' size='' arc='0' collisionSize='1' deathSound='Sounds/Units/Tank/hit.wav' typeId='tankmissile'/>
+ </instances>
+</de.jpenguin.type.basics.TypeList>

@@ -1,0 +1,26 @@
+Material Leaves : Common/MatDefs/Light/Lighting.j3md {
+
+    Transparent On
+
+    MaterialParameters {
+        DiffuseMap : Models/EliteTank/EliteSiegeTank.png
+        UseAlpha : true
+        AlphaDiscardThreshold : 0.5
+        UseMaterialColors : false
+        Ambient : 1.0 1.0 1.0 0.5
+        Diffuse : 1.0 1.0 1.0 1.0
+        Specular : 0.5 0.5 0.5 0.5
+        Shininess : 16
+        HighQuality : false
+        LowQuality : false
+        GlowColor : 0.50 0.5 0.5 0.5
+        UseVertexColor : false
+        Minnaert : false
+        VertexLighting : true
+    }
+    AdditionalRenderState {
+      Blend Alpha
+      AlphaTestFalloff 0.50
+      FaceCull Off
+    }
+}

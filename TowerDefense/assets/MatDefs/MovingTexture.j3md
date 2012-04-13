@@ -1,0 +1,27 @@
+MaterialDef MovingTexture {
+ 
+    MaterialParameters {
+        Texture2D ColorMap
+        Color Color ( Color )
+        Float Alpha
+        Float Rotation : 0.0
+        Float Speed
+    }
+ 
+    Technique {
+        VertexShader GLSL100:   Shaders/MovingTexture.vert
+        FragmentShader GLSL100: Shaders/MovingTexture.frag
+ 
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+ 
+        Defines {
+            HAS_COLORMAP : ColorMap
+            HAS_COLOR : Color
+            HAS_ALPHA : Alpha
+            IS_MOVING : Speed
+        }
+    }
+}

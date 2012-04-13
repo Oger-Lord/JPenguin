@@ -1,0 +1,56 @@
+<nifty>
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+  </style>
+
+
+  <screen id="mapselection" controller="de.jpenguin.menu.MapSelection">
+    <layer id="layer" backgroundColor="#0000" childLayout="center">
+
+
+      <panel id="menu" height="70%" width="60%" align="center" valign="center" backgroundColor="#222222" childLayout="vertical" visibleToMouse="true">
+	
+		<panel id="menu22" height="85%" width="100%" valign="center" childLayout="horizontal">
+			<control id="myListBox" name="listBox" height="100%" width="50%" vertical="on" horizontal="off" displayItems="18" selection="Single" />
+
+			<panel id="menu22" height="100%" width="50%" childLayout="vertical">
+
+				<panel childLayout="horizontal" height="5px" />
+				<text id="name" text="Descriptionbla" width="256" height="20" align="center" style="my"/>
+				
+				<image id="mappreview" filename="Interface/IngameGui/empty.png" height="256" width="256" align="center" ></image>
+
+				<text id="description" text="Descriptionbla" width="256" height="128" align="center"  style="my"/>
+
+				<text id="playerpreferences" text="Descriptionbla" width="256" height="20" align="center" style="my"/>
+				
+				<text id="creator" text="Descriptionbla" width="256" height="20" align="center" style="my"/>
+
+			</panel>
+
+		</panel>
+
+		<panel childLayout="horizontal" height="5px" />
+
+		<panel id="menu2" height="15%" width="100%" valign="center" childLayout="horizontal">
+			<panel childLayout="horizontal" width="5%" />
+
+			<control id="Menu" name="button" backgroundColor="#0000" label="Back" focusable="false" align="center" width="42%" height="90%">
+                    		<interact onClick="back()" />
+                	</control>
+
+			<panel childLayout="horizontal" width="6%" />
+
+			<control id="Menu" name="button" backgroundColor="#0000" label="Start Game" focusable="false" align="center" width="42%" height="90%">
+                    		<interact onClick="startGame()" />
+                	</control>
+		</panel>
+      </panel>
+
+
+    </layer>
+  </screen>
+</nifty>

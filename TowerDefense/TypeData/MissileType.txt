@@ -1,0 +1,6 @@
+model
+speed
+size
+arc
+collisionSize
+deathSound

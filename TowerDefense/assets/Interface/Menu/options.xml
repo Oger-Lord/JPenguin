@@ -1,0 +1,95 @@
+<nifty>
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+  </style>
+
+
+  <screen id="options" controller="de.jpenguin.menu.Options">
+    <layer id="layer" backgroundColor="#0000" childLayout="center">
+
+
+      <panel id="menu" height="350" width="65%" valign="center" backgroundColor="#222222" childLayout="vertical" visibleToMouse="true">
+
+
+	<panel id="menu2" height="80%" width="100%" valign="center" childLayout="horizontal">
+		<control id="edit_tabs" name="nifty-tabs">
+
+			<control id="tab_1" name="nifty-tab" caption="Profil" >
+
+				<panel id="menu2" height="90%" width="80%" valign="center" align="center" childLayout="vertical">
+					<text id="labelName" text="Playername:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+
+					<control id="playername" name="textfield" width="40%"/>
+				</panel>
+			</control>
+
+
+			<control id="tab_2" name="nifty-tab" caption="Display">
+				<panel childLayout="horizontal" width="5%" />
+
+				<panel id="menu2" height="90%" width="45%" valign="center" childLayout="vertical">
+
+					<text id="labelName" text="Resolution:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+					<control id="resolution" name="dropDown" width="40%" />
+
+
+					<panel childLayout="horizontal" height="10px" />
+
+					<text id="labelName" text="Bits per Pixel:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+					<control id="bpp" name="dropDown" width="40%" />
+
+
+					<panel childLayout="horizontal" height="10px" />
+
+					<panel width="100%" valign="center" childLayout="horizontal">
+						<text id="labelName" text="Vsync" width="80px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+						<control id="vsync" name="checkbox" />
+					</panel>
+
+				</panel>
+
+				<panel id="menu2" height="90%" width="45%" valign="center" childLayout="vertical">
+					<panel width="100%" valign="center" childLayout="horizontal">
+						<text id="labelName" text="Fullscreen" width="80px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+						<control id="fullscreen" name="checkbox" />
+					</panel>
+					<panel childLayout="horizontal" height="10px" />
+
+					<text id="labelName" text="Herz:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+					<control id="herz" name="dropDown" width="40%" />
+
+					<panel childLayout="horizontal" height="10px" />
+
+					<text id="labelName" text="Anti Aliasing:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+					<control id="antialiasing" name="dropDown" width="40%" />
+				
+				</panel>
+			</control>
+		</control>
+				
+			
+	</panel>
+
+		<panel id="menu2" height="20%" width="100%" valign="center" childLayout="horizontal">
+			<panel childLayout="horizontal" width="5%" />
+
+			<control id="Menu" name="button" backgroundColor="#0000" label="Back" focusable="false" align="center" width="42%" height="90%">
+                    		<interact onClick="back()" />
+                	</control>
+
+			<panel childLayout="horizontal" width="6%" />
+
+			<control id="Menu" name="button" backgroundColor="#0000" label="Apply" focusable="false" align="center" width="42%" height="90%">
+                    		<interact onClick="apply()" />
+                	</control>
+		</panel>
+
+      </panel>
+
+
+    </layer>
+  </screen>
+</nifty>

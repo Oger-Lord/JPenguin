@@ -1,0 +1,23 @@
+Material Leaves : Common/MatDefs/Light/Lighting.j3md {
+
+    Transparent On
+
+    MaterialParameters {
+        DiffuseMap : Models/DeepOne/deepone.png
+        UseAlpha : true
+        AlphaDiscardThreshold : 0.5
+        UseMaterialColors : false
+        Ambient : 1.0 1.0 1.0 0.5
+        Diffuse : 1.0 1.0 1.0 1.0
+        Specular : 0.5 0.5 0.5 0.5
+        Shininess : 16
+        HighQuality : false
+        LowQuality : false
+        GlowColor : 0.50 0.5 0.5 0.5
+    }
+    AdditionalRenderState {
+      Blend Alpha
+      AlphaTestFalloff 0.50
+      FaceCull Off
+    }
+}

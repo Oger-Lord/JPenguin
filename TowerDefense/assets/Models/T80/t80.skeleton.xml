@@ -1,0 +1,81 @@
+<skeleton>
+    <bones>
+        <bone id="0" name="Box01">
+            <position x="-0.00128748" y="0.301672" z="0.00180453" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="1" name="Cylinder01">
+            <position x="-0.00327113" y="0.36603" z="-0.00140203" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="2" name="Plane01">
+            <position x="-0.0617444" y="0.570621" z="-0.354174" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="3" name="Plane09">
+            <position x="0.544624" y="0.306432" z="-0.943813" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="4" name="Plane10">
+            <position x="0.544624" y="0.150504" z="0.495942" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="5" name="Plane11">
+            <position x="0.544624" y="0.150504" z="0.196124" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="6" name="Plane12">
+            <position x="0.544624" y="0.150504" z="-0.090212" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="7" name="Plane13">
+            <position x="0.544624" y="0.150504" z="-0.379746" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="8" name="Plane14">
+            <position x="0.544624" y="0.150504" z="-0.674874" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="9" name="Plane15">
+            <position x="0.544624" y="0.321753" z="1.07459" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="10" name="Plane16">
+            <position x="0.544624" y="0.150504" z="0.787987" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+        <bone id="11" name="__dummy__">
+            <position x="-0.00128748" y="0.301672" z="0.00180453" />
+            <rotation angle="0">
+                <axis x="1" y="0" z="0" />
+            </rotation>
+        </bone>
+    </bones>
+    <bonehierarchy>
+        <boneparent bone="Cylinder01" parent="Box01" />
+        <boneparent bone="Plane01" parent="Cylinder01" />
+    </bonehierarchy>
+    <animations />
+</skeleton>

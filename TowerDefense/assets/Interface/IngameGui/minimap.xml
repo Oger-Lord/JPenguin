@@ -1,0 +1,9 @@
+<nifty>
+ <controlDefinition name="minimapPanel" controller="de.jpenguin.gui.MinimapPanel">
+		<panel id="minimappanelbla" height="100%" width="100%" align="left" valign="bottom" backgroundColor="#000000" childLayout="center" visibleToMouse="true">
+	       		<interact onClick="click()"/>
+			<image id="minimap" filename="Interface/IngameGui/empty.png" height="100%" width="100%" ></image>
+		</panel>
+</controlDefinition>
+
+</nifty>

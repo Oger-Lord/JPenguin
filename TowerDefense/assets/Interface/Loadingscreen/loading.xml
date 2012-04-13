@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+ 
+    <controlDefinition name = "loadingbar" controller = "de.jpenguin.game.LoadingScreen">
+        <image filename="Interface/Loadingscreen/border.png" childLayout="absolute" 
+               imageMode="resize:15,2,15,15,15,2,15,2,15,2,15,15">
+            <image id="progressbar" x="0" y="0" filename="Interface/Loadingscreen/inner.png" width="32px" height="100%"
+                   imageMode="resize:15,2,15,15,15,2,15,2,15,2,15,15" />
+        </image>
+    </controlDefinition>
+
+ 
+    <screen id="loadlevel" controller = "de.jpenguin.game.LoadingScreen">
+
+
+	<layer id="sd" childLayout="center">
+		 <image filename="Interface/Loadingscreen/LoadingScreen.jpg" width="100%"/>
+	</layer>
+
+        <layer id="loadinglayer" childLayout="center">
+
+	 <panel childLayout="center">
+
+            <panel id = "loadingpanel" childLayout="vertical" align="center" valign="center" height="32px" width="70%" >
+                <control name="loadingbar" align="center" valign="center" width="100%" height="100%" />
+                <control id="loadingtext" name="label" align="center" color='#000000' 
+                         text="                                                  "/>
+            </panel>
+	</panel>
+        </layer>
+
+    </screen>
+ 
+    <screen id="end" controller = "de.jpenguin.game.LoadingScreen">
+    </screen>
+ 
+</nifty>

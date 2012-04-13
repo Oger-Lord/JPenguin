@@ -1,0 +1,4 @@
+<?xml  version='1.0' encoding='UTF-8'?>
+<com.jme3.post.filters.FogFilter fogDensity='1.0' fogDistance='400.0' format_version='2' name='FogFilter' savable_versions='0, 0'>
+    <fogColor a='0.5' b='0.9019608' class='com.jme3.math.ColorRGBA' g='0.9019608' r='0.9019608' savable_versions='0'/>
+</com.jme3.post.filters.FogFilter>

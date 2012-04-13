@@ -1,0 +1,8 @@
+name
+description
+orderId
+icon
+manaCosts
+cooldown
+position
+target

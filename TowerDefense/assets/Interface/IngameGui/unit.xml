@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- load default styles and controls -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+  </style>
+
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- start screen -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+ <controlDefinition name="unitPanel" controller="de.lessvoid.nifty.examples.multiplayer.MultiplayerPanelControl">
+
+      <panel id="dialog22" backgroundColor="#111111" childLayout="horizontal" width="100%" height="100%" align="center" valign="bottom"  visibleToMouse="true">
+
+
+	<panel childLayout="horizontal" width="10px" />
+
+
+	<panel childLayout="vertical" align="center" valign="center" width="40%" backgroundColor="#111111">
+
+	  <panel id="namePanel" childLayout="center" align="center" height="25">
+            <text id="labelunitname" text="Demon Hunter" width="150px" align="left" textVAlign="center" textHAlign="center" style="my"/>
+          </panel>
+
+
+          <panel id="namePanel" childLayout="horizontal" backgroundColor="#111111" >
+	     <panel id="testPanel" childLayout="horizontal" backgroundColor="#111111"align="center" width="40">
+		<image id="test" filename="Interface/IngameGui/attack.png" height="32" width="32" >
+		   <interact onClick="bla(1)" />
+		   <effect>
+       			<onHover name="myhint" hintText="Attack \#ff0000#hint." />
+ 
+  		   </effect>
+		</image>
+
+             </panel>
+
+	     <panel id="testPanel" childLayout="vertical" backgroundColor="#0000" align="center">
+                <text id="labelName" text="Damage:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+                <text id="labelunitdamage" text="1-10" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+             </panel>
+          </panel>
+
+          <panel childLayout="horizontal" height="8px" />
+
+
+          <panel id="namePanel" childLayout="horizontal" backgroundColor="#111111" >
+	     <panel id="testPanel" childLayout="horizontal" backgroundColor="#111111" align="center" width="40">
+		<image id="test" filename="Interface/IngameGui/armor.png" height="32" width="32" >
+		  <interact onClick="bla(1)" />
+		  <effect>
+			<onHover name="myhint" hintText="Damage hint." />
+ 
+  		  </effect>
+		</image>
+             </panel>
+
+	     <panel id="testPanel" childLayout="vertical" backgroundColor="#111111" align="center">
+                <text id="labelName" text="Armor:" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+                <text id="labelunitarmor" text="1" width="100px" align="left" textVAlign="center" textHAlign="left" style="my"/>
+             </panel>
+          </panel>
+
+	  <panel childLayout="horizontal" height="6px" />
+
+
+	  <panel id="buffPanel" childLayout="horizontal" height="24px" align="left" >
+		<panel childLayout="horizontal" height="0px" width="0px" />
+
+          </panel>
+
+	  <panel childLayout="horizontal" height="4px" />
+
+
+	</panel>
+	
+
+
+
+      </panel>
+
+</controlDefinition>
+
+
+</nifty>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty>
+
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- load default styles and controls -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+  </style>
+
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- start screen -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+<registerMouseCursor id="hand" filename="Interface/Cursor/cursor_enemy.png" hotspotX="0" hotspotY="0" />
+<registerEffect name="myhint" class="de.jpenguin.gui.HintEffect" />
+
+ <controlDefinition name="abilityPanel" controller="de.jpenguin.gui.AbilityPanel">
+
+      <panel id="dialog22" backgroundColor="#111111" childLayout="vertical" width="100%" height="100%" align="center" valign="bottom">
+
+
+	<panel id="dialog223" backgroundColor="#111111" childLayout="horizontal" width="100%" height="33.33%" align="center" valign="bottom">
+
+
+	  <panel id="abi0" childLayout="center" align="center" width="25%">
+		<image id="ability0" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(0)"/>
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" /> 
+				<onHover name="myhint" hintKey="ability0" />
+                                      
+  			</effect>
+		</image>
+          </panel>
+
+	  <panel id="abi1" childLayout="center" align="center" width="25%">
+		<image id="ability1" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(1)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />   
+				<onHover name="myhint" hintKey="ability1" />
+                                    
+  			</effect>
+		</image>
+          </panel>
+
+	  <panel id="abi2" childLayout="center" align="center" width="25%">
+            <image id="ability2" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(2)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability2" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+	  <panel id="abi3" childLayout="center" align="center" width="25%">
+            <image id="ability3" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(3)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability3" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+
+	</panel>
+
+
+	<panel id="dialog22" backgroundColor="#111111" childLayout="horizontal" width="100%" height="33.33%" align="center" valign="bottom">
+
+
+	  <panel id="abi4" childLayout="center" align="center" width="25%">
+            <image id="ability4" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(4)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability4" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+	  <panel id="abi5" childLayout="center" align="center" width="25%">
+            <image id="ability5" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(5)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability5" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+	  <panel id="abi6" childLayout="center" align="center" width="25%">
+            <image id="ability6" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(6)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability6" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+	  <panel id="abi7" childLayout="center" align="center" width="25%">
+            <image id="ability7" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(7)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability7" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+
+	</panel>
+
+
+	<panel id="dialog252" backgroundColor="#111111" childLayout="horizontal" width="100%" height="33.33%" align="center" valign="bottom">
+
+
+	 <panel id="abi8" childLayout="center" align="center" width="25%">
+           <image id="ability8" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(8)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability8" />
+                                         
+  			</effect>
+	     </image>
+	   </panel>
+
+	  <panel id="abi9" childLayout="center" align="center" width="25%">
+            <image id="ability9" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(9)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability9" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+	  <panel id="abi10" childLayout="center" align="center" width="25%">
+            <image id="ability10" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(10)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability10" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+	  <panel id="abi11" childLayout="center" align="center" width="25%">
+            <image id="ability11" filename="Interface/IngameGui/empty.png" height="100%" width="100%">
+			<interact onClick="click(11)" />
+  			<effect>
+    				<onClick name="imageSize" startSize="0.8" endSize="1.0" />
+				<onHover name="myhint" hintKey="ability11" />
+                                         
+  			</effect>
+	     </image>
+          </panel>
+
+
+	</panel>
+
+
+
+
+      </panel>
+
+</controlDefinition>
+
+
+</nifty>

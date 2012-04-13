@@ -1,0 +1,54 @@
+<nifty>
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+
+  <style id="my" base="button-font">
+    <attributes font="menu.fnt" color="#FFFFFF"/>
+	
+  </style>
+
+
+  <screen id="start" controller="de.jpenguin.menu.Menu">
+    <layer id="layer" backgroundColor="#0000" childLayout="center">
+
+
+      <panel id="menu" height="500" width="50%" valign="center" backgroundColor="#0000" childLayout="vertical" visibleToMouse="true">
+	
+	<panel backgroundColor="#222222" align="center" height="150" width="100%" childLayout="vertical" visibleToMouse="true">
+		<image id="ability" filename="Interface/Menu/JPenguin.png" height="100%" width="90%" align="center">
+		</image>
+	</panel>
+
+	<panel backgroundColor="#222222" align="center" height="*" width="80%" childLayout="vertical" visibleToMouse="true">
+
+		<panel childLayout="horizontal" height="20px" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Single Player" focusable="false" align="center" width="80%" height="20%">
+                    <interact onClick="selectMap()" />
+                </control>
+		
+		<panel childLayout="horizontal" height="5px" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Multiplayer" focusable="false" align="center" width="80%" height="20%">
+                    <interact onClick="multiplayer()" />
+                </control>
+
+		<panel childLayout="horizontal" height="5px" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Options" focusable="false" align="center" width="80%" height="20%">
+                    <interact onClick="options()" />
+                </control>
+
+		<panel childLayout="horizontal" height="5px" />
+
+		<control id="Menu" name="button" backgroundColor="#0000" label="Exit" focusable="false" align="center" width="80%" height="20%">
+                    <interact onClick="exit()" />
+                </control>
+	</panel>
+
+      </panel>
+
+
+    </layer>
+  </screen>
+</nifty>
