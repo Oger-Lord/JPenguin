@@ -29,7 +29,7 @@ public class Editor {
    private PlayerGUI playerGUI;
    private MapDescriptionGUI mapDescriptionGUI;
     
-   private static String path="C:/Users/Karsten/Documents/jMonkeyProjects/TowerDefense/";
+   private static String path="C:/Users/Karsten/Documents/jMonkeyProjects/JPenguin/TowerDefense/";
    private static String map="Map1";
    
    public static void main(String[] args){
