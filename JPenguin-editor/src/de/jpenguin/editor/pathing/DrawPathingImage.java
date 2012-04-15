@@ -4,6 +4,10 @@
  */
 package de.jpenguin.editor.pathing;
 
+import de.jpenguin.pathing.PathingMap;
+import de.jpenguin.pathing.PathingLayer;
+import de.jpenguin.pathing.PathingMapName;
+import de.jpenguin.editor.pathing.*;
 import com.jme3.texture.Image;
 import com.jme3.texture.Image.Format;
 import com.jme3.math.ColorRGBA;
@@ -22,7 +26,9 @@ import java.nio.ByteBuffer;
  */
 public class DrawPathingImage{
     
-    private int[][] oldMap;
+    private ColorRGBA[][] oldColors;
+    
+    private PathingMapName[] arrayMapsDisplay;
     
     private Image image;
     private FogOfWarTerrainThread thread;
@@ -34,15 +40,19 @@ public class DrawPathingImage{
     {
         this.pathingMap=pathingMap;
         
+        arrayMapsDisplay = new PathingMapName[2];
+        arrayMapsDisplay[0] = PathingMapName.UnitMap;
+        arrayMapsDisplay[1] = PathingMapName.EditorMap;
+        
         thread = new FogOfWarTerrainThread();
         image =new Image(Format.RGBA8,pathingMap.getWidth(),pathingMap.getHeight(),ByteBuffer.allocateDirect(pathingMap.getWidth()*pathingMap.getHeight()*4));
     
-        oldMap = new int[pathingMap.getWidth()][pathingMap.getHeight()];
+        oldColors = new ColorRGBA[pathingMap.getWidth()][pathingMap.getHeight()];
             for(int x=0;x<pathingMap.getWidth();x++)
             {
                 for(int y=0;y<pathingMap.getHeight();y++)
                 {
-                    oldMap[x][y] = -1;
+                    new ColorRGBA(0,0,0,0);
                 }
             }
     }
@@ -144,7 +154,7 @@ public class DrawPathingImage{
     
     
     
-    public void update(PathingMap anothermap)
+    public void update()
     {
         if(result == null || result.isDone())
         {
@@ -163,21 +173,12 @@ public class DrawPathingImage{
             {
                 for(int y=0;y<pathingMap.getHeight();y++)
                 {
-                    int value = anothermap.getValue(x, y)+pathingMap.getValue(x, y);
                     
-                    if(oldMap[x][y] != value)
+                    ColorRGBA color = getColor(x,y);
+                    
+                    if(oldColors.equals(color)==false)
                     {
-                        if(value == 1)
-                        {
-                            thread.change(x,y,new ColorRGBA(1,0,1,0.4f));
-                        }else if(value == 2)
-                        {
-                                thread.change(x,y,new ColorRGBA(1,0,0,0.6f));
-                        }else{
-                            thread.change(x,y,new ColorRGBA(0,0,0,0f));
-                        }
-
-                        oldMap[x][y] = value;
+                        thread.change(x,y,color);
                     }
                 }
             }
@@ -185,6 +186,33 @@ public class DrawPathingImage{
             result = executor.submit( thread );
         }
     }
+    
+    private ColorRGBA getColor(int x, int y)
+    {
+        ColorRGBA color = new ColorRGBA(0,0,0,0);
+        
+        if(pathingMap.getValue(pathingMap.convertIntX(x), pathingMap.convertIntY(y), PathingLayer.Ground,arrayMapsDisplay)==0)
+        {
+            color.r=1;
+            color.a=0.4f;
+        }
+        
+        if(pathingMap.getValue(pathingMap.convertIntX(x), pathingMap.convertIntY(y), PathingLayer.Air,arrayMapsDisplay)==0)
+        {
+            color.g=1;
+            color.a=0.4f;
+        }
+        
+        if(pathingMap.getValue(pathingMap.convertIntX(x), pathingMap.convertIntY(y), PathingLayer.Building,arrayMapsDisplay)==0)
+        {
+            color.b=1;
+            color.a=0.4f;
+        }
+        
+        return color;
+    }
+    
+    
     
     public Image getImage()
     {

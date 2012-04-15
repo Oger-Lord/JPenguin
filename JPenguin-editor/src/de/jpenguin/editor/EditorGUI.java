@@ -268,7 +268,7 @@ private void jMenuItemMapDescriptionActionPerformed(java.awt.event.ActionEvent e
         AppSettings settings = new AppSettings(true);
         settings.setWidth(1024);
         settings.setHeight(768);
-       // settings.setFrameRate(50);
+        settings.setFrameRate(50);
 
         
         

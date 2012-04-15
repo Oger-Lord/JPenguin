@@ -3,83 +3,99 @@
     <doodadTypes>
         <MapEntry key='bush'>
             <Savable class='de.jpenguin.editor.object.DoodadType' name='bush' savable_versions='0'>
-                <doodads size='38'>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@2098221246' savable_versions='0'>
+                <doodads size='46'>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@332950131' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-84.0' z='-14.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@2098221246'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1332071378' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@332950131'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@19614086' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-80.0' z='-28.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1332071378'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1526730988' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@19614086'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1049882943' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-98.0' z='-14.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1526730988'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@539342413' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1049882943'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@282303647' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-96.0' z='-28.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@539342413'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@124163361' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@282303647'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@668144844' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-32.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@124163361'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1877676958' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@668144844'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@2016531938' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-24.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1877676958'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1938552511' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@2016531938'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1813705512' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-16.0' y='-2.3841858E-7' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1938552511'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1065841116' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1813705512'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@840844771' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-4.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1065841116'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1955678730' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@840844771'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@749658912' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='4.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1955678730'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@993933632' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@749658912'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@314160763' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='12.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@993933632'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1104630711' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@314160763'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1903506870' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='20.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1104630711'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@944792079' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1903506870'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@848516929' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-16.0' z='26.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@944792079'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@701891251' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@848516929'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@91680441' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-8.0' z='26.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@701891251'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1446501865' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@91680441'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@912959835' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='28.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1446501865'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1862007600' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@912959835'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@771913016' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-40.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1862007600'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@450467833' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@771913016'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1639733674' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-48.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@450467833'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@821337743' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1639733674'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1335364646' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='36.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@821337743'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@70266357' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1335364646'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1931494437' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-56.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@70266357'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@387960286' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1931494437'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@115556431' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='44.0' z='10.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@387960286'/>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@115556431'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@728981380' savable_versions='0'>
+                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='72.0' z='10.0'/>
+                    </de.jpenguin.editor.object.Doodad>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@728981380'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@693106714' savable_versions='0'>
+                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='24.0' z='26.0'/>
+                    </de.jpenguin.editor.object.Doodad>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@693106714'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@229218358' savable_versions='0'>
+                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='32.0' z='26.0'/>
+                    </de.jpenguin.editor.object.Doodad>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@229218358'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1746180017' savable_versions='0'>
+                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='40.0' z='26.0'/>
+                    </de.jpenguin.editor.object.Doodad>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1746180017'/>
                 </doodads>
             </Savable>
         </MapEntry>

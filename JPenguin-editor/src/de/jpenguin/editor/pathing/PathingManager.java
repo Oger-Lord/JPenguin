@@ -4,6 +4,7 @@
  */
 package de.jpenguin.editor.pathing;
 
+import de.jpenguin.pathing.PathingMap;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
@@ -61,7 +62,6 @@ public class PathingManager extends AbstractAppState{
     private DrawPathingImage draw;
     
     private PathingMap pathingMap;
-    private PathingMap anotherMap;
     
    @Override
    public void initialize(AppStateManager stateManager, Application app) {
@@ -113,7 +113,6 @@ public class PathingManager extends AbstractAppState{
         int size = terrain.getTotalSize();
         
         pathingMap = new PathingMap(size/2,size/2,size);
-        anotherMap = new PathingMap(size/2,size/2,size);
         
        // image =new Image(Format.RGBA8,pathingMap.getWidth(),pathingMap.getHeight(),ByteBuffer.allocateDirect(pathingMap.getWidth()*pathingMap.getHeight()*4));
         
@@ -127,21 +126,8 @@ public class PathingManager extends AbstractAppState{
         terrain= editorApp.getTerrainManager().getTerrain();
         int size = terrain.getTotalSize();
         
-        anotherMap = new PathingMap(size/2,size/2,size);
-        
-        pathingMap = new PathingMap(PathingMapData.load(editorApp.getAssetManager(), Editor.getMap()));
-        /*
-        BinaryImporter imp = BinaryImporter.getInstance();
-        imp.setAssetManager(editorApp.getAssetManager());
-         try{
-            pathingMap = (PathingMap) imp.load( new File(Editor.getMapPath()+"PathingMap.bin"));
-        }catch(Exception e){
-            System.out.println("Error loading Pathing:" + e.getMessage());
-            pathingMap = new PathingMap(size/2,size/2,size);
-         //   pathingMap.badLine();
-        }
-         * 
-         */
+
+        pathingMap = PathingMap.load(editorApp.getAssetManager(), Editor.getMap());
         
         if(pathingMap == null)
         {
@@ -155,14 +141,7 @@ public class PathingManager extends AbstractAppState{
     
     public void save() {
         
-        PathingMapData.save(((PathingMapData)pathingMap).clone(), Editor.getMapPath());
-        /*
-       try{
-             BinaryExporter.getInstance().save(pathingMap, new File(Editor.getMapPath()+"PathingMap.bin"));
-        }catch(Exception e){
-        }
-         * 
-         */
+        PathingMap.save(pathingMap, Editor.getMapPath());
     }
     
     
@@ -171,7 +150,7 @@ public class PathingManager extends AbstractAppState{
     {
         if(hide==false)
         {
-            draw.update(anotherMap);
+            draw.update();
         }
     }
     
@@ -182,9 +161,5 @@ public class PathingManager extends AbstractAppState{
      */
     public PathingMap getPathingMap() {
         return pathingMap;
-    }
-    
-    public PathingMap getAnotherMap() {
-        return anotherMap;
     }
 }

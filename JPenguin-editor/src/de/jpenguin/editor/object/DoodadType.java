@@ -9,6 +9,10 @@ import com.jme3.export.*;
 import com.jme3.asset.AssetManager;
 
 import de.jpenguin.editor.engine.EditorApplication;
+import de.jpenguin.pathing.PathingLayer;
+import de.jpenguin.editor.pathing.EditorPathingUtils;
+import de.jpenguin.pathing.PathingMapName;
+import de.jpenguin.pathing.PathingMap;
 import de.jpenguin.editor.xml.TypeXMLFile;
 import de.jpenguin.editor.xml.TypeXMLManager;
 
@@ -131,12 +135,14 @@ public class DoodadType implements Savable {
                 
                 if(oldsize>0)
                 {
-                    editorApp.getPathingManager().getPathingMap().setSpace(d.getLocation().getX(), d.getLocation().getZ(), oldsize,0);
+                    PathingMap pm = editorApp.getPathingManager().getPathingMap();
+                    EditorPathingUtils.setSpace(pm,PathingMapName.UnitMap,PathingLayer.Building,d.getLocation().getX(), d.getLocation().getZ(), oldsize,false);
+                    EditorPathingUtils.setSpace(pm,PathingMapName.UnitMap,PathingLayer.Ground,d.getLocation().getX(), d.getLocation().getZ(), oldsize,false);
                 }
                 
                 if(pathingSize>0)
                 {
-                    d.setSpace(editorApp.getPathingManager().getPathingMap());
+                    d.setSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
                 }
                 
             }
@@ -147,12 +153,14 @@ public class DoodadType implements Savable {
                 
                 if(oldsize>0)
                 {
-                    editorApp.getPathingManager().getAnotherMap().setSpace(d.getLocation().getX(), d.getLocation().getZ(), oldsize,0);
+                    PathingMap pm = editorApp.getPathingManager().getPathingMap();
+                    EditorPathingUtils.setSpace(pm,PathingMapName.EditorMap,PathingLayer.Building,d.getLocation().getX(), d.getLocation().getZ(), oldsize,false);
+                    EditorPathingUtils.setSpace(pm,PathingMapName.EditorMap,PathingLayer.Ground,d.getLocation().getX(), d.getLocation().getZ(), oldsize,false);
                 }
                 
                 if(pathingSize>0)
                 {
-                    d.setSpace(editorApp.getPathingManager().getAnotherMap());
+                    d.setSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.EditorMap);
                 }
             } 
            

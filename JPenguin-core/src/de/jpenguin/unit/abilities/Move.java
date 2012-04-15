@@ -36,8 +36,13 @@ public class Move extends Ability{
       //  points = new ArrayList();
      //   points.add(new Vector3f(o.getTargetX(),0,o.getTargetY()));
         
-        PathingSearch pt =new PathingSearch(game.getPathingMap(), game.getGameApplication(),1,u.getX(), u.getY(), o.getTargetX(), o.getTargetY());
+        points = new ArrayList();
+        points.add(new Vector3f(order.getTargetX(),0,order.getTargetY()));
+        unit.getModel().setAnimation("walk");
         
+        /*
+        
+        PathingSearch pt =new PathingSearch(game.getPathingMap(), game.getGameApplication(),1,u.getX(), u.getY(), o.getTargetX(), o.getTargetY());
 
         if(pt.wayExists()==false)
         {
@@ -54,6 +59,8 @@ public class Move extends Ability{
         }else{
             unit.getModel().setAnimation("walk");
         }
+         * 
+         */
     }
     
     
@@ -172,8 +179,8 @@ public class Move extends Ability{
             }
         }
 
-        ArrayList pathingBlocks = game.getPathingMap().getObstacles(uu.getX(), uu.getY(), 5);
-        obstacles.addAll(pathingBlocks);
+    //    ArrayList pathingBlocks = game.getPathingMap().getObstacles(uu.getX(), uu.getY(), 5);
+     //   obstacles.addAll(pathingBlocks);
 
         return obstacles;
     }

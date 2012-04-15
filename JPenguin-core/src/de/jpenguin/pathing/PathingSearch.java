@@ -45,18 +45,19 @@ public class PathingSearch {
         this.pathingmap=pathingmap;
         nodeArray = new SearchNode[pathingmap.getWidth()][pathingmap.getHeight()];
         list = new PriorityQueue<SearchNode>();
-        this.targetX=pathingmap.convertFloatX(tx);
-        this.targetY=pathingmap.convertFloatY(ty);
+        this.targetX=pathingmap.convertX(tx);
+        this.targetY=pathingmap.convertY(ty);
         
-        int xx = pathingmap.convertFloatX(x);
-        int yy = pathingmap.convertFloatY(y);
+        int xx = pathingmap.convertX(x);
+        int yy = pathingmap.convertY(y);
         
         System.out.println(targetX + " " + targetY);
         System.out.println(xx + " " +yy);
         
         list.add(new SearchNode(null,0,xx,yy));
         
-        if(pathingmap.getValue(targetX, targetY)>=size)
+
+        if(check(targetX, targetY)>=size)
         {
             
             while(list.size()>0 && found==null)
@@ -67,6 +68,12 @@ public class PathingSearch {
             }
         }
         
+    }
+    
+    
+    private int check(float x, float y)
+    {
+        return pathingmap.getValue(x, y, PathingLayer.Ground, PathingMapName.UnitMap);
     }
     
     
@@ -167,14 +174,14 @@ public class PathingSearch {
         {
             if(x>0) //Left
             {
-                if((nodeArray[x-1][y]==null || nodeArray[x-1][y].hasWorked()==false) && pathingmap.getValue(x-1, y)>=size)
+                if((nodeArray[x-1][y]==null || nodeArray[x-1][y].hasWorked()==false) && check(x-1, y)>=size)
                 {
                     new SearchNode(this,length+1,x-1,y);
                 }
                 
                 if(y>0) //Left Top
                 {
-                    if((nodeArray[x-1][y-1]==null || nodeArray[x-1][y-1].hasWorked()==false) && pathingmap.getValue(x-1, y-1)>=size && pathingmap.getValue(x, y-1)>=size && pathingmap.getValue(x-1, y)>=size)
+                    if((nodeArray[x-1][y-1]==null || nodeArray[x-1][y-1].hasWorked()==false) && check(x-1, y-1)>=size && check(x, y-1)>=size && check(x-1, y)>=size)
                     {
                         new SearchNode(this,length+1.4142f,x-1,y-1);
                     }
@@ -182,7 +189,7 @@ public class PathingSearch {
                 
                 if(y<pathingmap.getHeight()-1) //Left Bottom
                 {
-                    if((nodeArray[x-1][y+1]==null || nodeArray[x-1][y+1].hasWorked()==false) && pathingmap.getValue(x-1, y+1)>=size && pathingmap.getValue(x, y+1)>=size && pathingmap.getValue(x-1, y)>=size)
+                    if((nodeArray[x-1][y+1]==null || nodeArray[x-1][y+1].hasWorked()==false) && check(x-1, y+1)>=size && check(x, y+1)>=size && check(x-1, y)>=size)
                     {
                         new SearchNode(this,length+1.4142f,x-1,y+1);
                     }
@@ -191,14 +198,14 @@ public class PathingSearch {
             
             if(x<pathingmap.getWidth()-1) //Right
             {
-                if((nodeArray[x+1][y]==null || nodeArray[x+1][y].hasWorked()==false) && pathingmap.getValue(x+1, y)>=size)
+                if((nodeArray[x+1][y]==null || nodeArray[x+1][y].hasWorked()==false) && check(x+1, y)>=size)
                 {
                     new SearchNode(this,length+1,x+1,y);
                 }
                 
                 if(y>0) //Rigth Top
                 {
-                    if((nodeArray[x+1][y-1]==null || nodeArray[x+1][y-1].hasWorked()==false) && pathingmap.getValue(x+1, y-1)>=size && pathingmap.getValue(x, y-1)>=size && pathingmap.getValue(x+1, y)>=size)
+                    if((nodeArray[x+1][y-1]==null || nodeArray[x+1][y-1].hasWorked()==false) && check(x+1, y-1)>=size && check(x, y-1)>=size && check(x+1, y)>=size)
                     {
                         new SearchNode(this,length+1.4142f,x+1,y-1);
                     }
@@ -206,7 +213,7 @@ public class PathingSearch {
                 
                 if(y<pathingmap.getHeight()-1) //Right Bottom
                 {
-                    if((nodeArray[x+1][y+1]==null || nodeArray[x+1][y+1].hasWorked()==false) && pathingmap.getValue(x+1, y+1)>=size && pathingmap.getValue(x, y+1)>=size && pathingmap.getValue(x+1, y)>=size)
+                    if((nodeArray[x+1][y+1]==null || nodeArray[x+1][y+1].hasWorked()==false) && check(x+1, y+1)>=size && check(x, y+1)>=size && check(x+1, y)>=size)
                     {
                         new SearchNode(this,length+1.4142f,x+1,y+1);
                     }
@@ -215,7 +222,7 @@ public class PathingSearch {
             
            if(y>0) //Top
             {
-                if((nodeArray[x][y-1]==null || nodeArray[x][y-1].hasWorked()==false) && pathingmap.getValue(x, y-1)>=size)
+                if((nodeArray[x][y-1]==null || nodeArray[x][y-1].hasWorked()==false) && check(x, y-1)>=size)
                 {
                     new SearchNode(this,length+1,x,y-1);
                 }
@@ -223,7 +230,7 @@ public class PathingSearch {
             
             if(y<pathingmap.getHeight()-1) //Bottom
             {
-                if((nodeArray[x][y+1]==null || nodeArray[x][y+1].hasWorked()==false) && pathingmap.getValue(x, y+1)>=size)
+                if((nodeArray[x][y+1]==null || nodeArray[x][y+1].hasWorked()==false) && check(x, y+1)>=size)
                 {
                     new SearchNode(this,length+1,x,y+1);
                 }

@@ -131,7 +131,7 @@ public class SettingManager extends AbstractAppState {
         basicRenderer = new BasicShadowRenderer(editorApp.getAssetManager(), 512);
         basicRenderer.setDirection(new Vector3f(-.5f,-.5f,-.5f).normalizeLocal()); // light direction
     
-        water();
+       // water();
     }
     
     

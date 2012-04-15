@@ -2,30 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.jpenguin.editor.pathing2;
+package de.jpenguin.pathing;
 
+import de.jpenguin.pathing.SubPathingMap;
+import de.jpenguin.pathing.PathingMap;
+import de.jpenguin.pathing.PathingMapName;
+import de.jpenguin.pathing.PathingLayer;
+import de.jpenguin.pathing.PathingField;
 import java.util.Enumeration;
 /**
  *
  * @author Karsten
  */
-public class GamePathingMap extends PathingMap {
+public class GamePathingUtils {
         
-    public void convert()
+    public static void convert(PathingMap pathingMap)
     {
-        Enumeration e = (Enumeration)subMaps.values();
-   
-        while(e.hasMoreElements())
+
+        for(PathingMapName map : PathingMapName.values())
         {
-          SubPathingMap subMap = (SubPathingMap)e.nextElement();
         
           for(PathingLayer layer : PathingLayer.values())
           {
-              for(int x=0;x<width;x++)
+              PathingField pfield = pathingMap.getPathingField(layer,map);
+              
+              for(int x=0;x<pfield.getWidth();x++)
               {
-                  for(int y=0;y<height;y++)
+                  for(int y=0;y<pfield.getHeight();y++)
                   {
-                      convertField(subMap,layer,x,y);
+                      convertField(pfield,x,y);
                   }
               }
               
@@ -33,9 +38,9 @@ public class GamePathingMap extends PathingMap {
         }
     }
     
-    public void convertField(SubPathingMap subMap, PathingLayer layer, int x, int y)
+    public static void convertField(PathingField pathingField, int x, int y)
     {
-        int value=subMap.getValue(x, y, layer);
+        int value=pathingField.getField(x, y);
         
         if(value==0){return;}
         
@@ -48,13 +53,13 @@ public class GamePathingMap extends PathingMap {
                 if(mx != x && my != y)
                 {
                     
-                    if(mx < 0 || (my < 0 && mx != width))
+                    if(mx < 0 || (my < 0 && mx != pathingField.getWidth()))
                     {
                         newvalue=1;
-                    }else if(mx == width || my == height){
+                    }else if(mx == pathingField.getWidth()|| my == pathingField.getHeight()){
                         newvalue=2;
                     }else{
-                        if(subMap.getValue(x, y, layer) == 0)
+                        if(pathingField.getField(x, y) == 0)
                         {
                             if(mx < x || (my<y && mx != x+1)){
                                 newvalue=1;
@@ -69,7 +74,7 @@ public class GamePathingMap extends PathingMap {
                         value=newvalue;
                         if(newvalue==1)
                         {
-                            subMap.setValue(x, y, layer,1);
+                            pathingField.setField(x, y, 1);
                             return;
                         }
                     }
@@ -77,9 +82,8 @@ public class GamePathingMap extends PathingMap {
             }
         }
         
-        subMap.setValue(x, y, layer,newvalue);
+        pathingField.setField(x, y, newvalue);
         return;
-        
     }
     
 }

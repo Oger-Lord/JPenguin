@@ -12,6 +12,7 @@ import de.jpenguin.editor.object.tools.*;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.math.Vector2f;
+import de.jpenguin.pathing.PathingMapName;
 
 import java.util.ArrayList;
 /**
@@ -109,14 +110,14 @@ public class Selection {
                 v2f.x += changeX;
                 v2f.y += changeY;
 
-                    d.removeSpace(editorApp.getPathingManager().getPathingMap());
+                    d.removeSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
                     d.setLocation(v2f, editorApp.getTerrainManager());
 
                     if(d.hasSpace(editorApp.getPathingManager().getPathingMap())==false)
                     {
                         d.setLocation(v2fold, editorApp.getTerrainManager());
                     }
-                    d.setSpace(editorApp.getPathingManager().getPathingMap());
+                    d.setSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
                     d.updateLocation();
                      getSelectionCircles().get(i).update();
                     

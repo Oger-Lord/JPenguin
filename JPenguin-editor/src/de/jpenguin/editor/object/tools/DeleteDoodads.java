@@ -23,6 +23,7 @@ import de.jpenguin.editor.object.Selection;
 import de.jpenguin.editor.object.Doodad;
 
 import de.jpenguin.editor.engine.EditorApplication;
+import de.jpenguin.pathing.PathingMapName;
 
 /**
  * Level the terrain to a desired height, executed from the OpenGL thread.
@@ -49,7 +50,7 @@ public class DeleteDoodads extends Undo {
 
             SelectionCircle sc = selectionCircles.get(0);
             
-            sc.getDoodad().removeSpace(editorApp.getPathingManager().getPathingMap());
+            sc.getDoodad().removeSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
             
             doodads.add(sc.getDoodad());
             
@@ -71,7 +72,7 @@ public class DeleteDoodads extends Undo {
         {
             doodads.get(i).getType().addDoodad(doodads.get(i));
             doodads.get(i).createSpatial(editorApp.getAssetManager(), editorApp.getObjectManager().getNode());
-            doodads.get(i).setSpace(editorApp.getPathingManager().getPathingMap());
+            doodads.get(i).setSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
         }
     }
  

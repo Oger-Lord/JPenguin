@@ -49,7 +49,7 @@ public class Building extends Unit{
             }
         }
         
-        game.getPathingMap().setSpace(x, y, unitType.getPathingSize(), true);
+       // game.getPathingMap().setSpace(x, y, unitType.getPathingSize(), true);
         
         init(game,unitType,p,x,y,rotation);
         

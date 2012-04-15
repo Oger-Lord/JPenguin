@@ -149,8 +149,8 @@ public class Game {
  
         setControllerPlayer(playerId);
         
-        pathingMap = new PathingMap(gameApp,getMyGame().getMap());
-        
+      //  pathingMap = new PathingMap(gameApp,getMyGame().getMap());
+        pathingMap = PathingMap.load(gameApp.getAssetManager(), getMyGame().getMap());
         
     }
     

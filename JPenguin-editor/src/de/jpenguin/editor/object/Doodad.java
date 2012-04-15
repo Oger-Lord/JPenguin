@@ -19,8 +19,11 @@ import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.material.RenderState.FaceCullMode;
 //import com.jme3.renderer
+import de.jpenguin.pathing.PathingLayer;
 
-import de.jpenguin.editor.pathing.PathingMap;
+import de.jpenguin.editor.pathing.EditorPathingUtils;
+import de.jpenguin.pathing.PathingMap;
+import de.jpenguin.pathing.PathingMapName;
 import de.jpenguin.editor.terrain.TerrainManager;
 
 
@@ -686,30 +689,28 @@ public class Doodad implements Savable {
     
     
     
-   public void setSpace(PathingMap pathingMap)
+   public void setSpace(PathingMap pathingMap, PathingMapName pmn)
    {
        if(type.getPathingSize() > 0)
        {
-           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(),1);
+           EditorPathingUtils.setSpace(pathingMap,pmn,PathingLayer.Building,location.getX(), location.getZ(), type.getPathingSize(),true);
+           EditorPathingUtils.setSpace(pathingMap,pmn,PathingLayer.Ground,location.getX(), location.getZ(), type.getPathingSize(),true);
        }
    }
    
-   public void removeSpace(PathingMap pathingMap)
+   public void removeSpace(PathingMap pathingMap, PathingMapName pmn)
    {
        if(type.getPathingSize() > 0)
        {
-           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(),0);
+          EditorPathingUtils.setSpace(pathingMap,pmn,PathingLayer.Building,location.getX(), location.getZ(), type.getPathingSize(),false);
+          EditorPathingUtils.setSpace(pathingMap,pmn,PathingLayer.Ground,location.getX(), location.getZ(), type.getPathingSize(),false);
        }
    }
    
    
    public boolean hasSpace(PathingMap pathingMap)
    {
-       if(type.getPathingSize() > 0)
-       {
-          return pathingMap.hasSpace(location.getX(), location.getZ(),type.getPathingSize());
-       }
-       return true;
+         return  EditorPathingUtils.hasSpace(pathingMap,location.getX(), location.getZ(),PathingLayer.Building,type.getPathingSize(),PathingMapName.DrawMap,PathingMapName.UnitMap,PathingMapName.WaterMap);
    }
 }
     

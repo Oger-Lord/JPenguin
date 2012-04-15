@@ -15,6 +15,7 @@ import de.jpenguin.editor.object.tools.*;
 import de.jpenguin.editor.engine.EditorApplication;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
+import de.jpenguin.pathing.PathingMapName;
 /**
  *
  * @author Karsten
@@ -53,9 +54,8 @@ public class Brush {
         
         d.createSpatial(editorApp.getAssetManager(), node);
         
-        d.setSpace(editorApp.getPathingManager().getAnotherMap());
-        
-        
+        d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
+
 
         
         if(d.getPathingSize() == 0)
@@ -100,7 +100,7 @@ public class Brush {
         {
             DoodadBrush d =(DoodadBrush)Doodad.Spatial2Doodad((Node)list.get(i));
             
-            d.removeSpace(editorApp.getPathingManager().getAnotherMap());
+            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
             
             /*
             Vector2f v2f = new Vector2f();
@@ -120,7 +120,7 @@ public class Brush {
                 d.setCanPlant(false);
             }
             
-            d.setSpace(editorApp.getPathingManager().getAnotherMap());
+            d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
             
            // editorApp.getPathingManager().getAnotherMap().setSpace(location.getX(), location.getZ(), 4,0);
           //  editorApp.getPathingManager().getAnotherMap().setSpace(v2f.getX(), v2f.getY(), 4,1);
@@ -147,7 +147,7 @@ public class Brush {
                 
                 doodads.add(d);
                 
-                sample.setSpace(editorApp.getPathingManager().getPathingMap());
+                sample.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.UnitMap);
             }
         }
         
@@ -161,7 +161,7 @@ public class Brush {
         for(int i=0;i<list.size();i++)
         {
             DoodadBrush d =(DoodadBrush)Doodad.Spatial2Doodad((Node)list.get(i)); 
-            d.removeSpace(editorApp.getPathingManager().getAnotherMap());
+            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
             d.remove();
         }
         empty=true;
