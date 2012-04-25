@@ -103,12 +103,12 @@ public class EditorApplication extends SimpleApplication {
         objectManager.setTool(tools);
         objectManager.setTypeXML(typeXML);
         terrainManager.setTool(tools);
-        pathingManager = new PathingManager();
+        pathingManager = new PathingManager(tools);
         
         stateManager.attach(objectManager);
         stateManager.attach(terrainManager);
         stateManager.attach(settingManager);
-       stateManager.attach(pathingManager);
+        stateManager.attach(pathingManager);
         
         stateManager.update(0);
             
@@ -300,9 +300,15 @@ public class EditorApplication extends SimpleApplication {
                 {
                     terrainManager.setEnabled(true);
                     objectManager.setEnabled(false);
-                }else{
+                    pathingManager.setEnabled(false);
+                }else if(name.equals("Objects")){
                     terrainManager.setEnabled(false);
                     objectManager.setEnabled(true);
+                    pathingManager.setEnabled(false);
+                }else{
+                    terrainManager.setEnabled(false);
+                    objectManager.setEnabled(false);
+                    pathingManager.setEnabled(true);
                 }
                 
                 return null;

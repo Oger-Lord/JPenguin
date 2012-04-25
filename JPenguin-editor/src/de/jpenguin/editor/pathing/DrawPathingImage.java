@@ -4,10 +4,6 @@
  */
 package de.jpenguin.editor.pathing;
 
-import de.jpenguin.pathing.PathingMap;
-import de.jpenguin.pathing.PathingLayer;
-import de.jpenguin.pathing.PathingMapName;
-import de.jpenguin.editor.pathing.*;
 import com.jme3.texture.Image;
 import com.jme3.texture.Image.Format;
 import com.jme3.math.ColorRGBA;
@@ -19,6 +15,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import de.jpenguin.pathing.*;
+
 import java.nio.ByteBuffer;
 /**
  *
@@ -28,29 +26,27 @@ public class DrawPathingImage{
     
     private ColorRGBA[][] oldColors;
     
-    private PathingMapName[] arrayMapsDisplay;
-    
     private Image image;
     private FogOfWarTerrainThread thread;
     private ExecutorService executor = Executors.newCachedThreadPool();
     private Future result;
     private PathingMap pathingMap;
     
-    public DrawPathingImage(PathingMap pathingMap)
+    private int width,height;
+    
+    public DrawPathingImage(PathingMap pathingMap, int width,int height)
     {
         this.pathingMap=pathingMap;
-        
-        arrayMapsDisplay = new PathingMapName[2];
-        arrayMapsDisplay[0] = PathingMapName.UnitMap;
-        arrayMapsDisplay[1] = PathingMapName.EditorMap;
+        this.width=width;
+        this.height=height;
         
         thread = new FogOfWarTerrainThread();
-        image =new Image(Format.RGBA8,pathingMap.getWidth(),pathingMap.getHeight(),ByteBuffer.allocateDirect(pathingMap.getWidth()*pathingMap.getHeight()*4));
+        image =new Image(Format.RGBA8,width,height,ByteBuffer.allocateDirect(width*height*4));
     
-        oldColors = new ColorRGBA[pathingMap.getWidth()][pathingMap.getHeight()];
-            for(int x=0;x<pathingMap.getWidth();x++)
+        oldColors = new ColorRGBA[width][height];
+            for(int x=0;x<width;x++)
             {
-                for(int y=0;y<pathingMap.getHeight();y++)
+                for(int y=0;y<height;y++)
                 {
                     new ColorRGBA(0,0,0,0);
                 }
@@ -66,7 +62,7 @@ public class DrawPathingImage{
         public FogOfWarTerrainThread()
         {
             changes = new ArrayList<FogChange>();
-            this.bb=ByteBuffer.allocateDirect(pathingMap.getWidth()*pathingMap.getHeight()*4);
+            this.bb=ByteBuffer.allocateDirect(width*height*4);
         }
         
         private class FogChange
@@ -169,9 +165,9 @@ public class DrawPathingImage{
                 image.setUpdateNeeded();
             }
             
-            for(int x=0;x<pathingMap.getWidth();x++)
+            for(int x=0;x<width;x++)
             {
-                for(int y=0;y<pathingMap.getHeight();y++)
+                for(int y=0;y<height;y++)
                 {
                     
                     ColorRGBA color = getColor(x,y);
@@ -190,23 +186,29 @@ public class DrawPathingImage{
     private ColorRGBA getColor(int x, int y)
     {
         ColorRGBA color = new ColorRGBA(0,0,0,0);
+
         
-        if(pathingMap.getValue(pathingMap.convertIntX(x), pathingMap.convertIntY(y), PathingLayer.Ground,arrayMapsDisplay)==0)
+        if(pathingMap.getSubMap(PathingMapName.Ground).hasSpaceDirect(x, y)==false)
         {
             color.r=1;
             color.a=0.4f;
         }
         
-        if(pathingMap.getValue(pathingMap.convertIntX(x), pathingMap.convertIntY(y), PathingLayer.Air,arrayMapsDisplay)==0)
+        if(pathingMap.getSubMap(PathingMapName.Air).hasSpaceDirect(x, y)==false)
         {
             color.g=1;
             color.a=0.4f;
         }
         
-        if(pathingMap.getValue(pathingMap.convertIntX(x), pathingMap.convertIntY(y), PathingLayer.Building,arrayMapsDisplay)==0)
+        if(pathingMap.getSubMap(PathingMapName.Building).hasSpaceDirect(x, y)==false)
         {
             color.b=1;
             color.a=0.4f;
+            
+            if(color.r==1f && color.g==1f)
+            {
+                color.a=0.6f;
+            }
         }
         
         return color;

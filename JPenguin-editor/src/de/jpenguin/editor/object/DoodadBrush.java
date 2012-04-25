@@ -9,7 +9,6 @@ import com.jme3.math.Vector2f;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 
-import de.jpenguin.pathing.PathingMap;
 import de.jpenguin.editor.terrain.TerrainManager;
 /**
  *

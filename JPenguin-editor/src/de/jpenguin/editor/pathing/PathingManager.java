@@ -4,7 +4,6 @@
  */
 package de.jpenguin.editor.pathing;
 
-import de.jpenguin.pathing.PathingMap;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
@@ -35,17 +34,21 @@ import com.jme3.material.Material;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.math.ColorRGBA;
 
+import com.jme3.math.Vector2f;
+
 import de.jpenguin.editor.Editor;
 import com.jme3.export.*;
 import java.io.IOException;
 import com.jme3.export.xml.*;
 import com.jme3.export.binary.*;
+import com.jme3.input.controls.MouseButtonTrigger;
 import java.io.File;
 
 import de.jpenguin.editor.engine.EditorApplication;
 import de.jpenguin.editor.terrain.tools.*;
 import com.jme3.shader.VarType;
-import de.jpenguin.loader.PathingMapData;
+import de.jpenguin.editor.EditorPalette;
+import de.jpenguin.pathing.*;
 
 import java.nio.ByteBuffer;
 /**
@@ -56,21 +59,53 @@ public class PathingManager extends AbstractAppState{
     
     private TerrainQuad terrain;
     private EditorApplication editorApp;
+    
+    private boolean wasHidden=true;
+    
     private boolean hide=true;
     private Image image;
     private Image emptyImage;
-    private DrawPathingImage draw;
+    private DrawPathingImage drawImage;
     
     private PathingMap pathingMap;
+    
+    private Geometry wfGeom;
+    
+    private boolean isActive=false;
+    
+    private EditorPalette tools;
+    
+    private boolean draw;
+    
+    public PathingManager(EditorPalette tools)
+    {
+        this.tools=tools; 
+        super.setEnabled(true);
+ }
     
    @Override
    public void initialize(AppStateManager stateManager, Application app) {
        super.initialize(stateManager,app);
-            
+       
        this.editorApp=(EditorApplication)app;
+               
+        wfGeom = new Geometry("test11",new Sphere(8, 8, 0.5f));
         
+        // WIREFRAME material
+        Material matWire = new Material(editorApp.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+        matWire.getAdditionalRenderState().setWireframe(true);
+        matWire.setColor("Color", ColorRGBA.Green);
+        
+        wfGeom.setMaterial(matWire);
+        wfGeom.setLocalScale(100, 100, 100);
+        wfGeom.setLocalTranslation(4, 4, 0); 
+       
+       
+        
+       editorApp.getInputManager().addMapping("mouseClickPathing", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
        editorApp.getInputManager().addMapping("change", new KeyTrigger(KeyInput.KEY_P));
-       editorApp.getInputManager().addListener(actionListener, "change");
+       
+       editorApp.getInputManager().addListener(actionListener, "change","mouseClickPathing");
        
        emptyImage =new Image(Format.RGBA8,4,4,ByteBuffer.allocateDirect(4*4*4));
    }
@@ -79,63 +114,86 @@ public class PathingManager extends AbstractAppState{
 
         public void onAction(String name, boolean pressed, float tpf) {
             
-            if(pressed){return;}
-            if(hide)
+            if(name.equals("change"))
             {
-                hide=false;
-                Texture texture = new Texture2D();
-                texture.setImage(image);
-                
-                texture.setMagFilter(Texture.MagFilter.Nearest);
-                texture.setMinFilter(Texture.MinFilter.NearestNoMipMaps);
-                texture.setWrap(Texture.WrapMode.Clamp);
-                
-                Material m =terrain.getMaterial();
-                m.setTexture("PathingMap", texture);
-                terrain.setMaterial(m);
-               // editorApp.getRootNode().attachChild(terrain);
-            }else{
-                Texture texture = new Texture2D();
-                texture.setImage(emptyImage);
-                Material m =terrain.getMaterial();
-                m.setTexture("PathingMap", texture);
-                terrain.setMaterial(m);
-                hide=true;
-              //  editorApp.getRootNode().detachChild(terrain);
+                if(pressed==false)
+                {
+                    if(isActive==false)
+                    {
+                        hide();
+                        wasHidden = hide;
+                    }
+                    
+                }
+            }else if(name.equals("mouseClickPathing"))
+            {
+                draw = pressed;
             }
 
         }
     };
+       
+       
+    public void hide()
+    {
+        System.out.println("HIDE!");
+        
+                    if(hide)
+                    {
+                        hide=false;
+                        Texture texture = new Texture2D();
+                        texture.setImage(image);
+
+                        texture.setMagFilter(Texture.MagFilter.Nearest);
+                        texture.setMinFilter(Texture.MinFilter.NearestNoMipMaps);
+                        texture.setWrap(Texture.WrapMode.Clamp);
+
+                        Material m =terrain.getMaterial();
+                        m.setTexture("PathingMap", texture);
+                        terrain.setMaterial(m);
+                       // editorApp.getRootNode().attachChild(terrain);
+                    }else{
+                        Texture texture = new Texture2D();
+                        texture.setImage(emptyImage);
+                        Material m =terrain.getMaterial();
+                        m.setTexture("PathingMap", texture);
+                        terrain.setMaterial(m);
+                        hide=true;
+                      //  editorApp.getRootNode().detachChild(terrain);
+                    }
+    }
+       
+       
     
     public void newPathing() {
         
         terrain= editorApp.getTerrainManager().getTerrain();
-        int size = terrain.getTotalSize();
+        int size = terrain.getTotalSize()-1;
         
-        pathingMap = new PathingMap(size/2,size/2,size);
+        pathingMap = new PathingMap(size,size,size);
         
        // image =new Image(Format.RGBA8,pathingMap.getWidth(),pathingMap.getHeight(),ByteBuffer.allocateDirect(pathingMap.getWidth()*pathingMap.getHeight()*4));
         
        // pathingMap.badLine();
-        draw= new DrawPathingImage(pathingMap);
-        image = draw.getImage();   
+        drawImage= new DrawPathingImage(pathingMap,size,size);
+        image = drawImage.getImage();   
     }
     
     
     public void load() {
         terrain= editorApp.getTerrainManager().getTerrain();
-        int size = terrain.getTotalSize();
+        int size = terrain.getTotalSize()-1;
         
 
         pathingMap = PathingMap.load(editorApp.getAssetManager(), Editor.getMap());
         
         if(pathingMap == null)
         {
-            pathingMap = new PathingMap(size/2,size/2,size);
+            pathingMap = new PathingMap(size,size,size);
         }
          
-        draw= new DrawPathingImage(pathingMap);
-        image = draw.getImage(); 
+        drawImage= new DrawPathingImage(pathingMap,size,size);
+        image = drawImage.getImage(); 
     }
     
     
@@ -150,10 +208,61 @@ public class PathingManager extends AbstractAppState{
     {
         if(hide==false)
         {
-            draw.update();
+            drawImage.update();
+        }
+        
+        if(isActive)
+        {
+            Vector3f intersection = editorApp.getTerrainManager().getWorldIntersection();
+            
+            if (terrain != null && intersection != null) {
+                float h = terrain.getHeight(new Vector2f(intersection.x, intersection.z));
+                Vector3f tl = terrain.getWorldTranslation();
+                wfGeom.setLocalScale((float)tools.getPathingBrushSize(), (float)tools.getPathingBrushSize(), (float)tools.getPathingBrushSize());
+                wfGeom.setLocalTranslation(tl.add(new Vector3f(intersection.x, h, intersection.z)) );
+                
+                
+                if(draw)
+                {
+                    int brushSize = (int)tools.getPathingBrushSize()/2;
+                    PathingMapName pm = PathingMapName.values()[tools.getPathingBrushMap()];
+                    
+                    if(tools.getPathingBrushType().equals("add"))
+                    {
+                        pathingMap.setSpace(intersection.x, intersection.z,brushSize, pm, PathingLayer.DrawMap, true);
+                    }else{
+                       pathingMap.setSpace(intersection.x, intersection.z,brushSize, pm, PathingLayer.DrawMap, false);
+                    }
+                    
+                }
+            }
         }
     }
     
+    
+    @Override
+    public void setEnabled(boolean b)
+    {
+        if(isActive==false && b==false)
+            return;
+        
+        isActive = b;
+        
+        if(b)
+        {
+            editorApp.getRootNode().attachChild(wfGeom);
+        }else{
+            editorApp.getRootNode().detachChild(wfGeom);
+        }
+        
+        if(b==false && wasHidden)
+        {
+            hide();
+        }else if(b && wasHidden)
+        {
+            hide();
+        }
+    }
     
 
     /**

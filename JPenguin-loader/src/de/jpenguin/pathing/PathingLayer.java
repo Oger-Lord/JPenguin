@@ -9,7 +9,7 @@ package de.jpenguin.pathing;
  * @author Karsten
  */
 public enum PathingLayer{
-        Water(0),Ground(1),Building(2),Air(3);
+        DrawMap(0),UnitMap(1),WaterMap(2),EditorMap(3);
         
         private final int i;
         PathingLayer(int i)

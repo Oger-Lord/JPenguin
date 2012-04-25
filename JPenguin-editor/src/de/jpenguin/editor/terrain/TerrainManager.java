@@ -154,7 +154,7 @@ public class TerrainManager extends AbstractAppState{
         if(tools != null)
         {
             
-            if (terrain != null && intersection != null && tools.getPalette().equals("terrain")) {
+            if (terrain != null && intersection != null) {
                 float h = terrain.getHeight(new Vector2f(intersection.x, intersection.z));
                 Vector3f tl = terrain.getWorldTranslation();
                 wfGeom.setLocalScale((float)tools.getBrushSize(), (float)tools.getBrushSize(), (float)tools.getBrushSize());
@@ -202,7 +202,7 @@ public class TerrainManager extends AbstractAppState{
             
             if(isEnabled()==false){return;}
             
-            if (name.equals("mouseClick") && tools.getPalette().equals("terrain")) {
+            if (name.equals("mouseClick") && isEnabled()) {
  
                   if(mouseDown ==false && pressed==true)
                   {

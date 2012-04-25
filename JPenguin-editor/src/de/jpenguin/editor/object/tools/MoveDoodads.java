@@ -18,13 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 import de.jpenguin.editor.engine.Undo;
 
-import de.jpenguin.pathing.PathingMapName;
 
 import de.jpenguin.editor.object.SelectionCircle;
 import de.jpenguin.editor.object.Selection;
 import de.jpenguin.editor.object.Doodad;
 
 import de.jpenguin.editor.engine.EditorApplication;
+import de.jpenguin.pathing.PathingLayer;
+import de.jpenguin.pathing.PathingMapName;
 
 /**
  * Level the terrain to a desired height, executed from the OpenGL thread.
@@ -57,13 +58,13 @@ public class MoveDoodads extends Undo {
         for(int i=0;i<doodads.size();i++)
         {
             
-            doodads.get(i).removeSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
+            doodads.get(i).removeSpace(editorApp.getPathingManager().getPathingMap(),PathingLayer.UnitMap);
             
             doodads.get(i).setLocation(positions.get(i), editorApp.getTerrainManager());
             
             doodads.get(i).updateLocation();
             
-            doodads.get(i).setSpace(editorApp.getPathingManager().getPathingMap(),PathingMapName.UnitMap);
+            doodads.get(i).setSpace(editorApp.getPathingManager().getPathingMap(),PathingLayer.UnitMap);
         }
     }
  

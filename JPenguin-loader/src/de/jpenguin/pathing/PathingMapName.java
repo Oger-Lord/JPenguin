@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Karsten
  */
     public enum PathingMapName{
-        DrawMap(0),UnitMap(1),WaterMap(2),EditorMap(3);
+        Ground(0),Building(1),Air(2),Water(3);
         
         private final int i;
         PathingMapName(int i)

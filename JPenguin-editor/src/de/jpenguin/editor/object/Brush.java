@@ -15,6 +15,7 @@ import de.jpenguin.editor.object.tools.*;
 import de.jpenguin.editor.engine.EditorApplication;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
+import de.jpenguin.pathing.PathingLayer;
 import de.jpenguin.pathing.PathingMapName;
 /**
  *
@@ -54,7 +55,7 @@ public class Brush {
         
         d.createSpatial(editorApp.getAssetManager(), node);
         
-        d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
+        d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
 
 
         
@@ -100,7 +101,7 @@ public class Brush {
         {
             DoodadBrush d =(DoodadBrush)Doodad.Spatial2Doodad((Node)list.get(i));
             
-            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
+            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
             
             /*
             Vector2f v2f = new Vector2f();
@@ -120,7 +121,7 @@ public class Brush {
                 d.setCanPlant(false);
             }
             
-            d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
+            d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
             
            // editorApp.getPathingManager().getAnotherMap().setSpace(location.getX(), location.getZ(), 4,0);
           //  editorApp.getPathingManager().getAnotherMap().setSpace(v2f.getX(), v2f.getY(), 4,1);
@@ -147,7 +148,7 @@ public class Brush {
                 
                 doodads.add(d);
                 
-                sample.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.UnitMap);
+                sample.setSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.UnitMap);
             }
         }
         
@@ -161,7 +162,7 @@ public class Brush {
         for(int i=0;i<list.size();i++)
         {
             DoodadBrush d =(DoodadBrush)Doodad.Spatial2Doodad((Node)list.get(i)); 
-            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingMapName.EditorMap);
+            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
             d.remove();
         }
         empty=true;

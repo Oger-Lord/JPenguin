@@ -4,6 +4,10 @@
  */
 package de.jpenguin.pathing;
 
+/**
+ *
+ * @author Karsten
+ */
 import com.jme3.export.*;
 import com.jme3.export.binary.*;
 import com.jme3.export.xml.*;
@@ -22,8 +26,6 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 
-
-    
                 
 /**
  *
@@ -31,169 +33,91 @@ import java.io.IOException;
  */
 public class PathingMap implements Savable {
     
-    protected int size;
-    protected int width,height;
     protected ArrayList<SubPathingMap> subMaps;
 
+    private int layerList[];
+    
     public PathingMap(int width, int height, int size)
     {
-        this.size=size;
-        this.width=width;
-        this.height=height;
+        layerList = new int[6];
         
+        layerList[0] = 1;
+        layerList[1] = 2;
+        layerList[2] = 4;
+        layerList[3] = 8;
+        layerList[4] = 16;
+        layerList[5] = 32;
+
         subMaps = new ArrayList();
-        
-        for(PathingMapName pNames : PathingMapName.values()) {
-            
-            SubPathingMap spm = new SubPathingMap();
-            
-            for(PathingLayer pLayer : PathingLayer.values()) {
-                PathingGrid pg = new PathingGrid(width,height,size);
-                spm.addLayer(pLayer, pg);
-            }
-            
-            subMaps.add(spm);
-                
-	}
+
+        //Ground(0)
+        subMaps.add(new SubPathingMap(size,size,size,1,false));
+        //Building(1)
+        subMaps.add(new SubPathingMap(size,size,size,2,false));
+        //Air(2)
+        subMaps.add(new SubPathingMap(size,size,size,2,false));
+        //Water(3)
+        subMaps.add(new SubPathingMap(size,size,size,1,false));
     }
     
     public PathingMap(){}
     
-    public PathingField getPathingField(PathingLayer pt,PathingMapName map)
-    {
-        return subMaps.get(map.getValue()).getLayer(pt);
-    }
     
-    public ArrayList<PathingField> getPathingFields(PathingLayer pt,PathingMapName ... maps)
+    public void loadGame()
     {
-        ArrayList<PathingField> al = new ArrayList();
-        
-        for(int i=0;i<maps.length;i++)
+        for(int i=0;i<subMaps.size();i++)
         {
-            SubPathingMap submap = subMaps.get(maps[i].getValue());
-            
-            if(submap.getLayer(pt) != null)
-            {
-                al.add(submap.getLayer(pt));
-            }
+            subMaps.get(i).loadGame();
         }
-        return al;
     }
     
     
-    public int getValue( float x, float y, PathingLayer pt,PathingMapName ... maps)
+    public SubPathingMap getSubMap(PathingMapName map)
     {
-        int returnValue=3;
-        int newValue;
-        
-        for(int i=0;i<maps.length;i++)
-        {
-            newValue = subMaps.get(maps[i].getValue()).getValue(x,y,pt);
-            if(returnValue > newValue)
-            {
-                if(newValue==0)
-                {
-                    return newValue;
-                }
-                returnValue = newValue;
-            }
-        }
-        
-        return returnValue;
+        return subMaps.get(map.getValue());
     }
+    
+    
+    public boolean hasSpace( float x, float y,int w, int h, PathingMapName map)
+    {
+        return subMaps.get(map.getValue()).hasSpace(x, y, w, h);
+    }
+    
+    public void setSpace( float x, float y,int w, int h, PathingMapName map, PathingLayer layer, boolean blocked)
+    {
+        subMaps.get(map.getValue()).setBlocked(x, y, w, h, blocked, layer, layerList);
+    }
+    
+    public void setSpace( float x, float y,int r, PathingMapName map, PathingLayer layer, boolean blocked)
+    {
+        subMaps.get(map.getValue()).setBlocked(x, y, r, blocked, layer, layerList);
+    }
+    
     /*
     
-    public void setValue( float x, float y, PathingLayer pt,PathingMapName map, int value)
+    public boolean hasSpaceDirect(int x, int y, PathingMapName map)
     {
-        subMaps.get(map.getValue()).setValue(x, y, pt, value);
-    } 
+        return subMaps.get(map.getValue()).hasSpaceDirect(x, y);
+    }
      * 
      */
     
-    public int convertX(float x)
-    {
-        return (int)((x+0.5+size/2f)/size*width);
-    }
-    
-    public int convertY(float y)
-    {
-        return (int)((y+0.5+size/2f)/size*height);
-    }
-    
-    public float convertIntX(int x)
-    {
-        return (float)(x+0.5)*(size/width)-size/2;
-    }
-     
-    public float convertIntY(int y)
-    {
-        return (float)(y-0.5f)*(size/height)-size/2;
-    }
-     
-
-    
-    public int getWidth()
-    {
-        return width;
-    }
-    
-    public int getHeight()
-    {
-        return height;
-    }
-    
-     public int getSize()
-    {
-        return size;
-    }
-     
-
    
     public void write(JmeExporter ex) throws IOException {
         OutputCapsule capsule = ex.getCapsule(this);
         
-        capsule.write(size,"size",0);
-        capsule.write(width,"width",0);
-        capsule.write(height,"height",0);
-        
-       // capsule.write(subMaps, "subMaps", null); 
         capsule.writeSavableArrayList(subMaps, "subMaps", null);
+        capsule.write(layerList, "layerList", null);
+        
     }
  
     public void read(JmeImporter im) throws IOException {
         InputCapsule capsule = im.getCapsule(this);
-        
-        size = capsule.readInt("size",1);
-        width = capsule.readInt("width",1);
-        height = capsule.readInt("height",1);
-        
-        subMaps = capsule.readSavableArrayList("subMaps", null);
-        
-        /*
-        Savable[] sav = capsule.readSavableArray("subMaps", null);
-        
-        if(sav == null)
-        {
-            System.out.println("OMG SHIT ECT...");
-        }else{
-           sav = new PathingField[sav.length];
-            
-            for(int i=0;i<sav.length;i++)
-            {
-                if(sav[i] == null)
-                {
-                    System.out.println("NULL ALARM!!!..." +i);
-                }else{
-                    subMaps[i] = (SubPathingMap) sav[i];
-                }
 
-                
-            }
-         * 
-         */
-            
-          //  pathingFields = (PathingField[])sav;
-        }
+        subMaps = capsule.readSavableArrayList("subMaps", null);
+        layerList = capsule.readIntArray("layerList", null);
+        
+    }
     
     public static void save(PathingMap pathingMap, String mappath)
     {
@@ -226,3 +150,5 @@ public class PathingMap implements Savable {
     }
     
 }
+  
+

@@ -60,6 +60,7 @@ public class EditorPalette extends javax.swing.JFrame {
         jMenuItemSetTexture = new javax.swing.JMenuItem();
         jMenuItemSetNormalMap = new javax.swing.JMenuItem();
         jMenuItemSetSize = new javax.swing.JMenuItem();
+        buttonGroupPathing = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -76,6 +77,12 @@ public class EditorPalette extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jPanel3 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jSliderPathingSize = new javax.swing.JSlider();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxPathing = new javax.swing.JComboBox();
 
         jMenuItemSetTexture.setText("Change Texture");
         jMenuItemSetTexture.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -249,6 +256,31 @@ public class EditorPalette extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Objects", jPanel2);
 
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroupPathing.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Add");
+        jPanel3.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        buttonGroupPathing.add(jRadioButton2);
+        jRadioButton2.setText("Remove");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
+        jPanel3.add(jSliderPathingSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        jLabel3.setText("Size");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        jComboBoxPathing.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ground", "Building", "Air" }));
+        jPanel3.add(jComboBoxPathing, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 200, -1));
+
+        jTabbedPane1.addTab("Pathing", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -392,11 +424,18 @@ private void jMenuItemSetNormalMapActionPerformed(java.awt.event.ActionEvent evt
     }
 }//GEN-LAST:event_jMenuItemSetNormalMapActionPerformed
 
+private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_jRadioButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.ButtonGroup buttonGroupPathing;
+    private javax.swing.JComboBox jComboBoxPathing;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JList jListTextures;
     private javax.swing.JMenuItem jMenuItemSetNormalMap;
@@ -404,7 +443,10 @@ private void jMenuItemSetNormalMapActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JMenuItem jMenuItemSetTexture;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButtonDraw;
     private javax.swing.JRadioButton jRadioButtonLevel;
     private javax.swing.JRadioButton jRadioButtonLower;
@@ -412,6 +454,7 @@ private void jMenuItemSetNormalMapActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JRadioButton jRadioButtonSmooth;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSlider jSliderPathingSize;
     private javax.swing.JSlider jSliderSize;
     private javax.swing.JSlider jSliderStrength;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -447,14 +490,38 @@ private void jMenuItemSetNormalMapActionPerformed(java.awt.event.ActionEvent evt
             return "antidraw";
         }
     }
-    
+    /*
     public String getPalette()
     {
         if(jTabbedPane1.getSelectedIndex()==0)
         {
             return "terrain";
+        }else if(jTabbedPane1.getSelectedIndex()==1)
+            return "unit";
+        else{
+            return "pathing";
         }
-        return "unit";
+    }
+     * 
+     */
+    
+    public String getPathingBrushType()
+    {
+        if(jRadioButton1.isSelected())
+        {
+            return "add";
+        }
+        return "remove";
+    }
+    
+    public double getPathingBrushSize()
+    {
+        return jSliderPathingSize.getValue()+1;
+    }
+    
+    public int getPathingBrushMap()
+    {
+        return jComboBoxPathing.getSelectedIndex();
     }
     
     public int getTexture()
