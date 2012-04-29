@@ -15,42 +15,33 @@ public class PathingGrid implements Savable {
     
     private boolean calculateUnitSize;
     
+    private int maxUnitSize;
     
+    //Only a test
     public static void main(String[] args) {
+
+        PathingGrid pg = new PathingGrid(10, 10, 5, true);
         
-        int layerList[] = new int[6];
-        
-        layerList[0] = 1;
-        layerList[1] = 2;
-        layerList[2] = 4;
-        layerList[3] = 8;
-        layerList[4] = 16;
-        layerList[5] = 32;
-        
-        
-        PathingGrid pg = new PathingGrid(10, 10, true);
-       // pg.setValue(3, 4, true);
-        
-        pg.setArea(6,3,2,2, true, 0,layerList);
+        pg.setArea(6,3,2,2, true, 0);
         
         System.out.println(pg.toString());
         
-        pg.setArea(6,3,2,2, true, 2,layerList);
+        pg.setArea(6,3,2,2, true, 2);
         
         System.out.println(pg.toString());
         
-        pg.setArea(6,3,2,2, false, 0,layerList);
+        pg.setArea(6,3,2,2, false, 0);
         
-       // pg.testLoad();
         System.out.println(pg.toString());
     }
 
     
-    public PathingGrid(int width, int height, boolean calculateUnitSize)
+    public PathingGrid(int width, int height, int maxUnitSize, boolean calculateUnitSize)
     {
         this.width=width;
         this.height=height;
         this.calculateUnitSize=calculateUnitSize;
+        this.maxUnitSize=maxUnitSize;
         
         pathingField = new int[width][height];
         
@@ -63,9 +54,9 @@ public class PathingGrid implements Savable {
                     int valueX = width-x;
                     int valueY = height-y;
 
-                    if(valueX >= 5 && valueY >= 5)
+                    if(valueX >= maxUnitSize && valueY >= maxUnitSize)
                     {
-                        pathingField[x][y] = 5;
+                        pathingField[x][y] = maxUnitSize;
                     }else{
 
                         if(valueX < valueY)
@@ -116,6 +107,20 @@ public class PathingGrid implements Savable {
         return true;
     }
     
+    public boolean hasSpace(int x, int y, int size)
+    {
+        if(x<width && x >= 0 && y < height && y >= 0)
+        {
+            if(pathingField[x][y] < size)
+            {
+                return false;
+            }
+        }else{
+            return false;
+        }
+        return true;
+    }
+    
     public boolean hasSpace(int startX, int startY,int pWidth, int pHeight)
     {
         for(int x=startX;x<startX+pWidth;x++)
@@ -139,7 +144,7 @@ public class PathingGrid implements Savable {
     }
     
     
-    public void setValue(int x, int y, boolean block, int layer, int layerList[])
+    public void setValue(int x, int y, boolean block, int layer)
     {
        if(x<width && x >= 0 && y < height && y >= 0)
        {
@@ -148,26 +153,26 @@ public class PathingGrid implements Savable {
             {
                 if(pathingField[x][y] >= 0 )
                 {
-                    pathingField[x][y] = -layerList[layer];
-                }else if (Math.abs(pathingField[x][y])%layerList[layer+1]<layerList[layer])
+                    pathingField[x][y] = -(int)Math.pow(2,layer);
+                }else if (Math.abs(pathingField[x][y])%(int)Math.pow(2,layer+1)<(int)Math.pow(2,layer))
                 {
-                    pathingField[x][y]-=layerList[layer];
+                    pathingField[x][y]-=(int)Math.pow(2,layer);
                 }
 
             }else{
-                if(pathingField[x][y] < 0 && Math.abs(pathingField[x][y])%layerList[layer+1]>=layerList[layer])
+                if(pathingField[x][y] < 0 && Math.abs(pathingField[x][y])%(int)Math.pow(2,layer+1)>=(int)Math.pow(2,layer))
                 {
-                    pathingField[x][y]+=layerList[layer];
+                    pathingField[x][y]+=(int)Math.pow(2,layer);
                 }
             }
 
-            int pheight = 5;
-            int pwidth = 5;
+            int pheight = maxUnitSize;
+            int pwidth = maxUnitSize;
 
-            if(x < 5)
+            if(x < maxUnitSize)
                 pwidth = x+1;
 
-            if(y < 5)
+            if(y < maxUnitSize)
                 pheight = y+1;
 
             if(calculateUnitSize)
@@ -178,7 +183,7 @@ public class PathingGrid implements Savable {
     }
     
     
-    public void setArea(int startX, int startY,int pWidth, int pHeight, boolean block, int layer, int layerList[])
+    public void setArea(int startX, int startY,int pWidth, int pHeight, boolean block, int layer)
     {
         for(int x=startX;x<startX+pWidth;x++)
         {
@@ -192,31 +197,31 @@ public class PathingGrid implements Savable {
                         
                         if(pathingField[x][y] >= 0 )
                         {
-                            pathingField[x][y] = -layerList[layer];
-                        }else if (Math.abs(pathingField[x][y])%layerList[layer+1]<layerList[layer])
+                            pathingField[x][y] = -(int)Math.pow(2,layer);
+                        }else if (Math.abs(pathingField[x][y])%(int)Math.pow(2,layer+1)<(int)Math.pow(2,layer))
                         {
-                            pathingField[x][y]-=layerList[layer];
+                            pathingField[x][y]-=(int)Math.pow(2,layer);
                         }
                         
                       //  System.out.println(pathingField[x][y]);
 
                     }else{
-                        if(pathingField[x][y] < 0 && Math.abs(pathingField[x][y])%layerList[layer+1]>=layerList[layer])
+                        if(pathingField[x][y] < 0 && Math.abs(pathingField[x][y])%(int)Math.pow(2,layer+1)>=(int)Math.pow(2,layer))
                         {
-                            pathingField[x][y]+=layerList[layer];
+                            pathingField[x][y]+=(int)Math.pow(2,layer);
                         }
                     }
                   }
             }
         }
         
-        int changeX = 5;
-        int changeY = 5;
+        int changeX = maxUnitSize;
+        int changeY = maxUnitSize;
         
-        if(startX < 5)
+        if(startX < maxUnitSize)
             changeX = startX;
         
-        if(startY < 5)
+        if(startY < maxUnitSize)
             changeY = startY;
 
         if(calculateUnitSize)
@@ -225,7 +230,7 @@ public class PathingGrid implements Savable {
         }
     }
     
-    public void setAreaCircle(int middleX, int middleY,int pRadius, boolean block, int layer, int layerList[])
+    public void setAreaCircle(int middleX, int middleY,int pRadius, boolean block, int layer)
     {
         for(int x=middleX-pRadius;x<middleX+pRadius;x++)
         {
@@ -242,18 +247,18 @@ public class PathingGrid implements Savable {
 
                             if(pathingField[x][y] >= 0 )
                             {
-                                pathingField[x][y] = -layerList[layer];
-                            }else if (Math.abs(pathingField[x][y])%layerList[layer+1]<layerList[layer])
+                                pathingField[x][y] = -(int)Math.pow(2,layer);
+                            }else if (Math.abs(pathingField[x][y])%(int)Math.pow(2,layer+1)<(int)Math.pow(2,layer))
                             {
-                                pathingField[x][y]-=layerList[layer];
+                                pathingField[x][y]-=(int)Math.pow(2,layer);
                             }
 
                           //  System.out.println(pathingField[x][y]);
 
                         }else{
-                            if(pathingField[x][y] < 0 && Math.abs(pathingField[x][y])%layerList[layer+1]>=layerList[layer])
+                            if(pathingField[x][y] < 0 && Math.abs(pathingField[x][y])%(int)Math.pow(2,layer+1)>=(int)Math.pow(2,layer))
                             {
-                                pathingField[x][y]+=layerList[layer];
+                                pathingField[x][y]+=(int)Math.pow(2,layer);
                             }
                         }
                     }
@@ -261,13 +266,13 @@ public class PathingGrid implements Savable {
             }
         }
         
-        int changeX = 5;
-        int changeY = 5;
+        int changeX = maxUnitSize;
+        int changeY = maxUnitSize;
         
-        if(middleX-pRadius < 5)
+        if(middleX-pRadius < maxUnitSize)
             changeX = middleX-pRadius;
         
-        if(middleY-pRadius < 5)
+        if(middleY-pRadius < maxUnitSize)
             changeY = middleY-pRadius;
 
         if(calculateUnitSize)
@@ -292,9 +297,9 @@ public class PathingGrid implements Savable {
                     if(pathingField[x][y+1] < 0 || pathingField[x+1][y] < 0 || pathingField[x+1][y+1] < 0)
                     {
                         pathingField[x][y] = 1;
-                    }else if(pathingField[x][y+1] >= 5 && pathingField[x+1][y] >= 5)
+                    }else if(pathingField[x][y+1] >= maxUnitSize && pathingField[x+1][y] >= maxUnitSize)
                     {
-                        pathingField[x][y] = 5;
+                        pathingField[x][y] = maxUnitSize;
                     }else{
                         
                         if(pathingField[x][y+1] < pathingField[x+1][y])
@@ -364,6 +369,8 @@ public class PathingGrid implements Savable {
         
         capsule.write(width,"width",0);
         capsule.write(height,"height",0);
+        capsule.write(maxUnitSize,"maxUnitSize",0);
+        
         
         capsule.write(calculateUnitSize,"calculateUnitSize",true);
         
@@ -376,6 +383,7 @@ public class PathingGrid implements Savable {
         
         width = capsule.readInt("width",1);
         height = capsule.readInt("height",1);
+        maxUnitSize= capsule.readInt("maxUnitSize",1);
         
         calculateUnitSize = capsule.readBoolean("calculateUnitSize",true);
         

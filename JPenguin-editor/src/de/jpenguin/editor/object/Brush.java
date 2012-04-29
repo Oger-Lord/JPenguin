@@ -15,8 +15,7 @@ import de.jpenguin.editor.object.tools.*;
 import de.jpenguin.editor.engine.EditorApplication;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
-import de.jpenguin.pathing.PathingLayer;
-import de.jpenguin.pathing.PathingMapName;
+import de.jpenguin.pathing.PathingMap;
 /**
  *
  * @author Karsten
@@ -55,7 +54,7 @@ public class Brush {
         
         d.createSpatial(editorApp.getAssetManager(), node);
         
-        d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
+        d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMap.LayerEditor);
 
 
         
@@ -101,7 +100,7 @@ public class Brush {
         {
             DoodadBrush d =(DoodadBrush)Doodad.Spatial2Doodad((Node)list.get(i));
             
-            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
+            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingMap.LayerEditor);
             
             /*
             Vector2f v2f = new Vector2f();
@@ -121,7 +120,7 @@ public class Brush {
                 d.setCanPlant(false);
             }
             
-            d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
+            d.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMap.LayerEditor);
             
            // editorApp.getPathingManager().getAnotherMap().setSpace(location.getX(), location.getZ(), 4,0);
           //  editorApp.getPathingManager().getAnotherMap().setSpace(v2f.getX(), v2f.getY(), 4,1);
@@ -148,7 +147,7 @@ public class Brush {
                 
                 doodads.add(d);
                 
-                sample.setSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.UnitMap);
+                sample.setSpace(editorApp.getPathingManager().getPathingMap(), PathingMap.LayerUnit);
             }
         }
         
@@ -162,7 +161,7 @@ public class Brush {
         for(int i=0;i<list.size();i++)
         {
             DoodadBrush d =(DoodadBrush)Doodad.Spatial2Doodad((Node)list.get(i)); 
-            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingLayer.EditorMap);
+            d.removeSpace(editorApp.getPathingManager().getPathingMap(), PathingMap.LayerEditor);
             d.remove();
         }
         empty=true;

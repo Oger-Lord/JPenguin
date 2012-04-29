@@ -152,7 +152,10 @@ public class Game {
       //  pathingMap = new PathingMap(gameApp,getMyGame().getMap());
         
         pathingMap = PathingMap.load(gameApp.getAssetManager(), getMyGame().getMap());
-        pathingMap.loadGame();
+        
+        pathingMap.getSubMap(PathingMap.MapGround).activateUnitPathfinding();
+        pathingMap.getSubMap(PathingMap.MapAir).activateUnitPathfinding();
+        pathingMap.getSubMap(PathingMap.MapWater).activateUnitPathfinding();
     }
     
     public void update(float tpf)

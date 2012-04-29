@@ -1,0 +1,41 @@
+<?xml  version='1.0' encoding='UTF-8'?>
+<de.jpenguin.loader.PlayerDataMapManager format_version='2' savable_versions='0'>
+    <player>
+        <MapEntry key='p7'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p6'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p5'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p4'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p3'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p2'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' controller='2' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p12'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p1'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' controller='2' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p11'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p10'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p9'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+        <MapEntry key='p8'>
+            <Savable class='de.jpenguin.loader.PlayerDataMap' savable_versions='0'/>
+        </MapEntry>
+    </player>
+</de.jpenguin.loader.PlayerDataMapManager>

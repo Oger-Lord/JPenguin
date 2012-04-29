@@ -34,11 +34,11 @@ public class DrawPathingImage{
     
     private int width,height;
     
-    public DrawPathingImage(PathingMap pathingMap, int width,int height)
+    public DrawPathingImage(PathingMap pathingMap, int w,int h)
     {
         this.pathingMap=pathingMap;
-        this.width=width;
-        this.height=height;
+        this.width=w*2;
+        this.height=h*2;
         
         thread = new FogOfWarTerrainThread();
         image =new Image(Format.RGBA8,width,height,ByteBuffer.allocateDirect(width*height*4));
@@ -187,20 +187,22 @@ public class DrawPathingImage{
     {
         ColorRGBA color = new ColorRGBA(0,0,0,0);
 
-        
-        if(pathingMap.getSubMap(PathingMapName.Ground).hasSpaceDirect(x, y)==false)
+        float scale=pathingMap.getSubMap(0).getScale();
+        if(pathingMap.getSubMap(0).hasSpaceDirect((int)(x*scale/2), (int)(y*scale/2))==false) //Ground
         {
             color.r=1;
             color.a=0.4f;
         }
         
-        if(pathingMap.getSubMap(PathingMapName.Air).hasSpaceDirect(x, y)==false)
+        scale=pathingMap.getSubMap(1).getScale();
+        if(pathingMap.getSubMap(1).hasSpaceDirect((int)(x*scale/2), (int)(y*scale/2))==false) //Air
         {
             color.g=1;
             color.a=0.4f;
         }
         
-        if(pathingMap.getSubMap(PathingMapName.Building).hasSpaceDirect(x, y)==false)
+        scale=pathingMap.getSubMap(2).getScale();
+        if(pathingMap.getSubMap(2).hasSpaceDirect((int)(x*scale/2), (int)(y*scale/2))==false) //Building
         {
             color.b=1;
             color.a=0.4f;

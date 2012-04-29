@@ -39,9 +39,7 @@ import com.jme3.shadow.PssmShadowRenderer;
 import com.jme3.shadow.PssmShadowRenderer.CompareMode;
 import com.jme3.shadow.PssmShadowRenderer.FilterMode;
 
-import com.jme3.water.WaterFilter;
-import com.jme3.post.FilterPostProcessor;
-import com.jme3.texture.Texture2D;
+
 
 import com.jme3.shadow.BasicShadowRenderer;
 
@@ -72,8 +70,7 @@ public class SettingManager extends AbstractAppState {
     private boolean fogIsActive=true;
     private boolean shadowIsActive=true;
     private boolean ambientLightIsActive=true;
-    
-    private FilterPostProcessor postWater;
+
     
     
     @Override
@@ -249,7 +246,7 @@ public class SettingManager extends AbstractAppState {
         {
             if(active)
             {
-                editorApp.getViewPort().removeProcessor(postWater);
+                editorApp.getWaterManager().hide(true);
                 
                 editorApp.getRootNode().removeLight(standard_al);
                 editorApp.getRootNode().removeLight(standard_dl);
@@ -271,7 +268,7 @@ public class SettingManager extends AbstractAppState {
                 editorApp.getRootNode().addLight(dl);
                 editorApp.getRootNode().attachChild(sky);
                 
-                editorApp.getViewPort().addProcessor(postWater);
+                editorApp.getWaterManager().hide(false);
             }else{
                 editorApp.getRootNode().addLight(standard_al);
                 editorApp.getRootNode().addLight(standard_dl);
@@ -403,25 +400,6 @@ public class SettingManager extends AbstractAppState {
     
     
     
-    private void water()
-    {
-        WaterFilter  water = new WaterFilter(editorApp.getRootNode(), new Vector3f(-1f, -1f, -1f));
-        postWater = new FilterPostProcessor(editorApp.getAssetManager());
-        postWater.addFilter(water);
 
-        water.setWaveScale(0.003f);
-        water.setMaxAmplitude(2f);
-        water.setFoamExistence(new Vector3f(1f, 4, 0.5f));
-        water.setFoamTexture((Texture2D) editorApp.getAssetManager().loadTexture("Common/MatDefs/Water/Textures/foam2.jpg"));
-        //water.setNormalScale(0.5f);
-
-        //water.setRefractionConstant(0.25f);
-        water.setRefractionStrength(0.2f);
-        //water.setFoamHardness(0.6f);
-
-        water.setWaterHeight(0);
-        
-        editorApp.getViewPort().addProcessor(postWater);
-    }
         
 }

@@ -19,9 +19,7 @@ import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.material.RenderState.FaceCullMode;
 //import com.jme3.renderer
-import de.jpenguin.pathing.PathingLayer;
 import de.jpenguin.pathing.PathingMap;
-import de.jpenguin.pathing.PathingMapName;
 
 import de.jpenguin.editor.terrain.TerrainManager;
 
@@ -688,28 +686,28 @@ public class Doodad implements Savable {
     
     
     
-   public void setSpace(PathingMap pathingMap, PathingLayer layer)
+   public void setSpace(PathingMap pathingMap, int layer)
    {
        if(type.getPathingSize() > 0)
        {
-           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMapName.Building, layer, true);
-           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMapName.Ground, layer, true);
+           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMap.MapBuilding, layer, true);
+           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMap.MapGround, layer, true);
        }
    }
    
-   public void removeSpace(PathingMap pathingMap, PathingLayer layer)
+   public void removeSpace(PathingMap pathingMap, int layer)
    {
        if(type.getPathingSize() > 0)
        {
-           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMapName.Building, layer, false);
-           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMapName.Ground, layer, false);
+           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMap.MapBuilding, layer, false);
+           pathingMap.setSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMap.MapGround, layer, false);
        }
    }
    
    
    public boolean hasSpace(PathingMap pathingMap)
    {
-       return pathingMap.hasSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMapName.Ground);
+       return pathingMap.hasSpace(location.getX(), location.getZ(), type.getPathingSize(), type.getPathingSize(), PathingMap.MapGround);
    }
 }
     

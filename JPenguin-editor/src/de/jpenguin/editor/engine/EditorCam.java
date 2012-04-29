@@ -40,7 +40,7 @@ public class EditorCam implements AnalogListener, ActionListener {
      */
     public EditorCam(Camera cam){
         this.cam = cam;
-        cam.setLocation(new Vector3f(0,100,0));
+        cam.setLocation(new Vector3f(0,50,0));
         initialUpVec = cam.getUp().clone();
     }
 
@@ -282,8 +282,8 @@ public class EditorCam implements AnalogListener, ActionListener {
     
     public void camReset()
     {
-        cam.setLocation(cam.getLocation().setY(100f));
-        cam.lookAt(new Vector3f(cam.getLocation().getX(), 0f, cam.getLocation().getZ()-50), Vector3f.UNIT_Y);
+        cam.setLocation(cam.getLocation().setY(50f));
+        cam.lookAt(new Vector3f(cam.getLocation().getX(), 0f, cam.getLocation().getZ()-25), Vector3f.UNIT_Y);
         
         //cam.setLocation(new Vector3f(0, 100f, 50));
        // cam.lookAt(new Vector3f(0f, 0f, 0f), Vector3f.UNIT_Y);

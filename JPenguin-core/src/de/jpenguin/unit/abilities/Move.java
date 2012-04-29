@@ -9,7 +9,7 @@ import de.jpenguin.unit.Ability;
 import de.jpenguin.unit.Order;
 import de.jpenguin.unit.SimpleUnit;
 
-import de.jpenguin.pathing.PathingSearch;
+import de.jpenguin.pathing.JumpPointSearch;
 
 import com.jme3.ai.steering.behaviour.ObstacleAvoidNew;
 import com.jme3.ai.steering.behaviour.Seek;
@@ -17,6 +17,7 @@ import com.jme3.ai.steering.Obstacle;
 import com.jme3.math.Vector3f;
 
 import de.jpenguin.game.Game;
+import de.jpenguin.pathing.PathingMap;
 
 import java.util.ArrayList;
 /**
@@ -37,8 +38,18 @@ public class Move extends Ability{
      //   points.add(new Vector3f(o.getTargetX(),0,o.getTargetY()));
         
         points = new ArrayList();
-        points.add(new Vector3f(order.getTargetX(),0,order.getTargetY()));
+       // points.add(new Vector3f(order.getTargetX(),0,order.getTargetY()));
         unit.getModel().setAnimation("walk");
+        
+        JumpPointSearch jps = new JumpPointSearch(game.getPathingMap(), PathingMap.MapGround,1,u.getX(), u.getY(), o.getTargetX(), o.getTargetY());
+
+        if(jps.wayExists()==false)
+        {
+            destroy();
+            return;
+        }
+        
+        points = jps.getVectorList();
         
         /*
         
@@ -67,7 +78,7 @@ public class Move extends Ability{
     public void update(float tpf)
     {
         
-        if(points == null || points.get(0) == null)
+        if(points == null || points.isEmpty() || points.get(0) == null)
         {
             destroy();
             return;

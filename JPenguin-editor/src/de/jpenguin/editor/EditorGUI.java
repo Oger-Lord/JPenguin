@@ -69,6 +69,7 @@ public class EditorGUI extends javax.swing.JFrame {
         jMenuItemSave = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItemSettings = new javax.swing.JMenuItem();
+        jMenuItemWater = new javax.swing.JMenuItem();
         jMenuAdvanced = new javax.swing.JMenu();
         jMenuItemPlayer = new javax.swing.JMenuItem();
         jMenuItemMapDescription = new javax.swing.JMenuItem();
@@ -143,6 +144,14 @@ public class EditorGUI extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItemSettings);
 
+        jMenuItemWater.setText("Water");
+        jMenuItemWater.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemWaterActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemWater);
+
         jMenuBar1.add(jMenu2);
 
         jMenuAdvanced.setText("Advanced");
@@ -208,6 +217,10 @@ private void jMenuItemMapDescriptionActionPerformed(java.awt.event.ActionEvent e
     editor.newMapDescriptionGUI();
 }//GEN-LAST:event_jMenuItemMapDescriptionActionPerformed
 
+private void jMenuItemWaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemWaterActionPerformed
+    editor.getEditorApplication().getWaterManager().click();
+}//GEN-LAST:event_jMenuItemWaterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSelection;
@@ -223,6 +236,7 @@ private void jMenuItemMapDescriptionActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JMenuItem jMenuItemPlayer;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemSettings;
+    private javax.swing.JMenuItem jMenuItemWater;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 

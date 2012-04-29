@@ -357,6 +357,7 @@ public class ObjectManager extends AbstractAppState{
             String alias = (String)e.nextElement();
             DoodadType dt= doodadTypes.get(alias);
             dt.clear();
+            dt.setParentNode(myRootNode);
         }
        
    }

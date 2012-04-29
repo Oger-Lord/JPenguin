@@ -56,7 +56,6 @@ public class GameApplication extends SimpleApplication{
     private Node clickableNode;
     
     private Game game;
-    private Geometry mark;
     private TerrainQuad terrain;
     private Node doodadNode;
     

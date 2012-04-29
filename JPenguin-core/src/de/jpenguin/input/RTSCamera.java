@@ -35,12 +35,12 @@ public class RTSCamera implements ActionListener {
     private boolean mouseIsActivated=false;
     
     private TerrainQuad terrain;
-    private float distance=30;
+    private float distance=22;
     
     public RTSCamera(Camera cam)
     {
         this.cam = cam;
-        cam.setLocation(new Vector3f(0, 30f, 15));
+        cam.setLocation(new Vector3f(0, 22f, 11));
         cam.lookAt(new Vector3f(0f, 0f, 0f), Vector3f.UNIT_Y);
     }
     

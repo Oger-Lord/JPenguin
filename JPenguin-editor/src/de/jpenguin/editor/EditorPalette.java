@@ -465,7 +465,7 @@ private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     
     public double getBrushSize()
     {
-        return jSliderSize.getValue()+1;
+        return (jSliderSize.getValue()+1)/2;
     }
     
     public double getBrushStrength()
@@ -516,7 +516,7 @@ private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     
     public double getPathingBrushSize()
     {
-        return jSliderPathingSize.getValue()+1;
+        return (jSliderPathingSize.getValue()+1)/2;
     }
     
     public int getPathingBrushMap()

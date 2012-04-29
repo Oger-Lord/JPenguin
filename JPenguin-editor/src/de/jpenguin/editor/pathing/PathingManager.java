@@ -170,7 +170,19 @@ public class PathingManager extends AbstractAppState{
         terrain= editorApp.getTerrainManager().getTerrain();
         int size = terrain.getTotalSize()-1;
         
-        pathingMap = new PathingMap(size,size,size);
+        pathingMap = new PathingMap();
+        
+        //0 ground
+        pathingMap.addSubPathingMap(new SubPathingMap(size,size,5,2));
+        
+        //1 air
+        pathingMap.addSubPathingMap(new SubPathingMap(size,size,5,1));
+        
+        //2 building
+        pathingMap.addSubPathingMap(new SubPathingMap(size,size,5,1));
+        
+        //3 water
+        pathingMap.addSubPathingMap(new SubPathingMap(size,size,5,1f));
         
        // image =new Image(Format.RGBA8,pathingMap.getWidth(),pathingMap.getHeight(),ByteBuffer.allocateDirect(pathingMap.getWidth()*pathingMap.getHeight()*4));
         
@@ -189,11 +201,12 @@ public class PathingManager extends AbstractAppState{
         
         if(pathingMap == null)
         {
-            pathingMap = new PathingMap(size,size,size);
-        }
+            newPathing();
+        }else{
          
-        drawImage= new DrawPathingImage(pathingMap,size,size);
-        image = drawImage.getImage(); 
+            drawImage= new DrawPathingImage(pathingMap,size,size);
+            image = drawImage.getImage(); 
+        }
     }
     
     
@@ -225,13 +238,13 @@ public class PathingManager extends AbstractAppState{
                 if(draw)
                 {
                     int brushSize = (int)tools.getPathingBrushSize()/2;
-                    PathingMapName pm = PathingMapName.values()[tools.getPathingBrushMap()];
+                    int pm = tools.getPathingBrushMap();
                     
                     if(tools.getPathingBrushType().equals("add"))
                     {
-                        pathingMap.setSpace(intersection.x, intersection.z,brushSize, pm, PathingLayer.DrawMap, true);
+                        pathingMap.setSpace(intersection.x, intersection.z,brushSize, pm, PathingMap.LayerDraw, true);
                     }else{
-                       pathingMap.setSpace(intersection.x, intersection.z,brushSize, pm, PathingLayer.DrawMap, false);
+                       pathingMap.setSpace(intersection.x, intersection.z,brushSize, pm, PathingMap.LayerDraw, false);
                     }
                     
                 }

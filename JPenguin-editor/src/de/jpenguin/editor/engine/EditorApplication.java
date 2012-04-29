@@ -42,6 +42,7 @@ public class EditorApplication extends SimpleApplication {
     private ObjectManager objectManager;
     private SettingManager settingManager;
     private PathingManager pathingManager;
+    private WaterManager waterManager;
     
     private Stack<Undo> undoStack;
     private boolean nextUndo=false;
@@ -64,7 +65,7 @@ public class EditorApplication extends SimpleApplication {
         
         assetManager.registerLocator(Editor.getPath()+"assets/", FileLocator.class);
 
-        cam.setLocation(new Vector3f(0, 100f, 50));
+        cam.setLocation(new Vector3f(0, 50f, 25));
         cam.lookAt(new Vector3f(0f, 0f, 0f), Vector3f.UNIT_Y);
         
         undoStack = new Stack<Undo>();
@@ -104,11 +105,13 @@ public class EditorApplication extends SimpleApplication {
         objectManager.setTypeXML(typeXML);
         terrainManager.setTool(tools);
         pathingManager = new PathingManager(tools);
+        waterManager = new WaterManager();
         
         stateManager.attach(objectManager);
         stateManager.attach(terrainManager);
         stateManager.attach(settingManager);
         stateManager.attach(pathingManager);
+        stateManager.attach(waterManager);
         
         stateManager.update(0);
             
@@ -212,6 +215,7 @@ public class EditorApplication extends SimpleApplication {
             terrainManager.newTerrain(size);
             objectManager.clear();
             pathingManager.newPathing();
+            waterManager.newWater();
             
             return null;
         }
@@ -228,6 +232,7 @@ public class EditorApplication extends SimpleApplication {
                 terrainManager.save();
                 objectManager.save();
                 pathingManager.save();
+                waterManager.save();
                 new MinimapGenerator(EditorApplication.this, terrainManager.getTerrain(),objectManager.getNode(),512,512,new File(Editor.getMapPath()+"minimap.png"));
                           
                   return null;
@@ -246,6 +251,7 @@ public class EditorApplication extends SimpleApplication {
                   objectManager.load();
                   settingManager.load();
                   pathingManager.load();
+                  waterManager.load();
 
                   tools.setTextureList(TerrainUtils.terrainGetTextures(terrainManager.getTerrain(), 64, 64));
                   
@@ -275,6 +281,11 @@ public class EditorApplication extends SimpleApplication {
     public PathingManager getPathingManager()
     {
         return pathingManager;
+    }
+    
+    public WaterManager getWaterManager()
+    {
+        return waterManager;
     }
     
     public void activate(String name)

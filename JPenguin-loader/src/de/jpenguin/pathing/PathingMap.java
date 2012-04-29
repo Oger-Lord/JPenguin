@@ -29,75 +29,71 @@ import java.io.IOException;
                 
 /**
  *
- * @author Karsten
+ * @author Oger-Lord
  */
 public class PathingMap implements Savable {
     
     protected ArrayList<SubPathingMap> subMaps;
-
-    private int layerList[];
     
-    public PathingMap(int width, int height, int size)
+    public static final int LayerDraw = 0;
+    public static final int LayerUnit = 1;
+    public static final int LayerWater = 2;
+    public static final int LayerEditor = 3;
+    
+    
+    public static final int MapGround = 0;
+    public static final int MapAir = 1;
+    public static final int MapBuilding= 2;
+    public static final int MapWater = 3;
+    
+    public PathingMap()
     {
-        layerList = new int[6];
         
-        layerList[0] = 1;
-        layerList[1] = 2;
-        layerList[2] = 4;
-        layerList[3] = 8;
-        layerList[4] = 16;
-        layerList[5] = 32;
-
         subMaps = new ArrayList();
-
-        //Ground(0)
-        subMaps.add(new SubPathingMap(size,size,size,1,false));
-        //Building(1)
-        subMaps.add(new SubPathingMap(size,size,size,2,false));
-        //Air(2)
-        subMaps.add(new SubPathingMap(size,size,size,2,false));
-        //Water(3)
-        subMaps.add(new SubPathingMap(size,size,size,1,false));
     }
     
-    public PathingMap(){}
+    
+    public void addSubPathingMap(SubPathingMap subMap)
+    {
+        subMaps.add(subMap);
+    }
     
     
-    public void loadGame()
+    public void activateUnitPathfinding()
     {
         for(int i=0;i<subMaps.size();i++)
         {
-            subMaps.get(i).loadGame();
+            subMaps.get(i).activateUnitPathfinding();
         }
     }
     
     
-    public SubPathingMap getSubMap(PathingMapName map)
+    public SubPathingMap getSubMap(int map)
     {
-        return subMaps.get(map.getValue());
+        return subMaps.get(map);
     }
     
     
-    public boolean hasSpace( float x, float y,int w, int h, PathingMapName map)
+    public boolean hasSpace( float x, float y,int w, int h, int map)
     {
-        return subMaps.get(map.getValue()).hasSpace(x, y, w, h);
+        return subMaps.get(map).hasSpace(x, y, w, h);
     }
     
-    public void setSpace( float x, float y,int w, int h, PathingMapName map, PathingLayer layer, boolean blocked)
+    public void setSpace( float x, float y,int w, int h, int map, int layer, boolean blocked)
     {
-        subMaps.get(map.getValue()).setBlocked(x, y, w, h, blocked, layer, layerList);
+        subMaps.get(map).setBlocked(x, y, w, h, blocked, layer);
     }
     
-    public void setSpace( float x, float y,int r, PathingMapName map, PathingLayer layer, boolean blocked)
+    public void setSpace( float x, float y,int r, int map, int layer, boolean blocked)
     {
-        subMaps.get(map.getValue()).setBlocked(x, y, r, blocked, layer, layerList);
+        subMaps.get(map).setBlocked(x, y, r, blocked, layer);
     }
     
     /*
     
-    public boolean hasSpaceDirect(int x, int y, PathingMapName map)
+    public boolean hasSpaceDirect(int x, int y, int map)
     {
-        return subMaps.get(map.getValue()).hasSpaceDirect(x, y);
+        return subMaps.get(map).hasSpaceDirect(x, y);
     }
      * 
      */
@@ -107,7 +103,6 @@ public class PathingMap implements Savable {
         OutputCapsule capsule = ex.getCapsule(this);
         
         capsule.writeSavableArrayList(subMaps, "subMaps", null);
-        capsule.write(layerList, "layerList", null);
         
     }
  
@@ -115,9 +110,10 @@ public class PathingMap implements Savable {
         InputCapsule capsule = im.getCapsule(this);
 
         subMaps = capsule.readSavableArrayList("subMaps", null);
-        layerList = capsule.readIntArray("layerList", null);
         
     }
+    
+        
     
     public static void save(PathingMap pathingMap, String mappath)
     {

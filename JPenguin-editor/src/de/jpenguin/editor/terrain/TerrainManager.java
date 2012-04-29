@@ -133,9 +133,11 @@ public class TerrainManager extends AbstractAppState{
             if (tools.getBrushType().equals("raise"))
             {
                     adjustHeight(intersection, (float)tools.getBrushSize()/2, tpf * ((float)tools.getBrushStrength())/2);
+                    editorApp.getWaterManager().changeHeight(intersection, (float)tools.getBrushSize()/2);
             }else if (tools.getBrushType().equals("lower"))
             {
                     adjustHeight(intersection, (float)tools.getBrushSize()/2, -tpf * ((float)tools.getBrushStrength())/2);
+                    editorApp.getWaterManager().changeHeight(intersection, (float)tools.getBrushSize()/2);
             }else if (tools.getBrushType().equals("draw"))
             {
                     adjustTexture(intersection, (float)tools.getBrushSize()/2, ((float)tools.getBrushStrength())/2);
@@ -145,9 +147,11 @@ public class TerrainManager extends AbstractAppState{
             }else if (tools.getBrushType().equals("smooth"))
             {
                     adjustSmooth(intersection, (float)tools.getBrushSize()/2, tpf *((float)tools.getBrushStrength()/2));
+                    editorApp.getWaterManager().changeHeight(intersection, (float)tools.getBrushSize()/2);
             }else if (tools.getBrushType().equals("level"))
             {
                     adjustLevel(intersection, (float)tools.getBrushSize()/2, tpf *((float)tools.getBrushStrength()/2));
+                    editorApp.getWaterManager().changeHeight(intersection, (float)tools.getBrushSize()/2);
             }
         }
 
@@ -269,9 +273,6 @@ public class TerrainManager extends AbstractAppState{
                 terrain = null;
             }
 
-        
-         
-
         // TERRAIN TEXTURE material
         Material matTerrain = new Material(editorApp.getAssetManager(), "MatDefs/Terrain/TerrainLighting.j3md");
         matTerrain.setBoolean("useTriPlanarMapping", false);
@@ -360,16 +361,16 @@ public class TerrainManager extends AbstractAppState{
     private void updateAlphamap(int width, int height,Material m)
     {
         Texture tex_ml = new Texture2D();
-        tex_ml.setImage(getImage(width, height,false));
+        tex_ml.setImage(getImage(width*2, height*2,false));
         m.setTexture("AlphaMap", tex_ml);
 
         
         tex_ml = new Texture2D();
-        tex_ml.setImage(getImage(width, height,true));
+        tex_ml.setImage(getImage(width*2, height*2,true));
         m.setTexture("AlphaMap_1", tex_ml);
         
         tex_ml = new Texture2D();
-        tex_ml.setImage(getImage(width, height,true));
+        tex_ml.setImage(getImage(width*2, height*2,true));
         m.setTexture("AlphaMap_2", tex_ml);
     }
     
@@ -551,7 +552,6 @@ public class TerrainManager extends AbstractAppState{
             
               tools.setTextureList(TerrainUtils.terrainGetTextures(terrain, 64, 64));
         }catch(Exception e){}
-      
        
     }
     
