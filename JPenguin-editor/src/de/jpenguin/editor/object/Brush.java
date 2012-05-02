@@ -37,7 +37,7 @@ public class Brush {
       //  doodads = new ArrayList();
         this.editorApp=app;
         node = new Node();
-        app.getRootNode().attachChild(node);
+        app.getSceneNode().attachChild(node);
         location = Vector3f.ZERO;
         
         dragPositions = new ArrayList();

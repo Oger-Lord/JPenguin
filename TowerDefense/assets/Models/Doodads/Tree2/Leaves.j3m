@@ -5,7 +5,6 @@ Material Leaves : Common/MatDefs/Light/Lighting.j3md {
     MaterialParameters {
         DiffuseMap : Models/Doodads/Tree2/test.png
         UseAlpha : true
-        AlphaDiscardThreshold : 0.90000004
         UseMaterialColors : true
         Ambient : 0 0 0 0
         Diffuse : 1 1 1 1.0

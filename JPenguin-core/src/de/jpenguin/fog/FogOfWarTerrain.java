@@ -13,6 +13,8 @@ import com.jme3.material.MatParam;
 import com.jme3.material.Material;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.math.ColorRGBA;
+import de.jpenguin.engine.MyWaterFilter;
+import de.jpenguin.engine.Water;
 
 import java.util.Hashtable;
 import java.util.Enumeration;
@@ -35,7 +37,7 @@ public class FogOfWarTerrain extends FogOfWarEffect {
     private ExecutorService executor = Executors.newCachedThreadPool();
     private Future result;
     
-    public FogOfWarTerrain(TerrainQuad terrain)
+    public FogOfWarTerrain(TerrainQuad terrain, Water water)
     {
         texture = new Texture2D();
         
@@ -46,6 +48,11 @@ public class FogOfWarTerrain extends FogOfWarEffect {
         Material m =terrain.getMaterial();
         m.setTexture("FogMap", texture);
         terrain.setMaterial(m);
+        
+        if(water != null)
+        {
+            water.setFogMap(texture);
+        }
     }
     
     private class FogOfWarTerrainThread implements Callable

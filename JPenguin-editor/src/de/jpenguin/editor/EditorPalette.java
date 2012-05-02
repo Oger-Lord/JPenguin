@@ -61,6 +61,7 @@ public class EditorPalette extends javax.swing.JFrame {
         jMenuItemSetNormalMap = new javax.swing.JMenuItem();
         jMenuItemSetSize = new javax.swing.JMenuItem();
         buttonGroupPathing = new javax.swing.ButtonGroup();
+        buttonGroupWater = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -83,6 +84,13 @@ public class EditorPalette extends javax.swing.JFrame {
         jSliderPathingSize = new javax.swing.JSlider();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxPathing = new javax.swing.JComboBox();
+        jPanel4 = new javax.swing.JPanel();
+        jRadioButtonWaterAdd = new javax.swing.JRadioButton();
+        jRadioButtonWaterRemove = new javax.swing.JRadioButton();
+        jSliderWaterSize = new javax.swing.JSlider();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListWater = new javax.swing.JList();
 
         jMenuItemSetTexture.setText("Change Texture");
         jMenuItemSetTexture.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,6 +133,7 @@ public class EditorPalette extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
@@ -259,7 +268,6 @@ public class EditorPalette extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroupPathing.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Add");
         jPanel3.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
@@ -281,11 +289,42 @@ public class EditorPalette extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Pathing", jPanel3);
 
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroupWater.add(jRadioButtonWaterAdd);
+        jRadioButtonWaterAdd.setSelected(true);
+        jRadioButtonWaterAdd.setText("Add");
+        jPanel4.add(jRadioButtonWaterAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        buttonGroupWater.add(jRadioButtonWaterRemove);
+        jRadioButtonWaterRemove.setText("Remove");
+        jRadioButtonWaterRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonWaterRemoveActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jRadioButtonWaterRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
+        jPanel4.add(jSliderWaterSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jLabel4.setText("Size");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jListWater.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jListWaterMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jListWater);
+
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, 190));
+
+        jTabbedPane1.addTab("Water", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,22 +467,34 @@ private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 // TODO add your handling code here:
 }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+private void jRadioButtonWaterRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonWaterRemoveActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_jRadioButtonWaterRemoveActionPerformed
+
+private void jListWaterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListWaterMouseReleased
+// TODO add your handling code here:
+}//GEN-LAST:event_jListWaterMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.ButtonGroup buttonGroupPathing;
+    private javax.swing.ButtonGroup buttonGroupWater;
     private javax.swing.JComboBox jComboBoxPathing;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList jList1;
     private javax.swing.JList jListTextures;
+    private javax.swing.JList jListWater;
     private javax.swing.JMenuItem jMenuItemSetNormalMap;
     private javax.swing.JMenuItem jMenuItemSetSize;
     private javax.swing.JMenuItem jMenuItemSetTexture;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
@@ -452,11 +503,15 @@ private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JRadioButton jRadioButtonLower;
     private javax.swing.JRadioButton jRadioButtonRaise;
     private javax.swing.JRadioButton jRadioButtonSmooth;
+    private javax.swing.JRadioButton jRadioButtonWaterAdd;
+    private javax.swing.JRadioButton jRadioButtonWaterRemove;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSliderPathingSize;
     private javax.swing.JSlider jSliderSize;
     private javax.swing.JSlider jSliderStrength;
+    private javax.swing.JSlider jSliderWaterSize;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
@@ -514,16 +569,42 @@ private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         return "remove";
     }
     
+     public String getWaterBrushType()
+    {
+        if(jRadioButtonWaterAdd.isSelected())
+        {
+            return "add";
+        }
+        return "remove";
+    }
+    
+    
     public double getPathingBrushSize()
     {
         return (jSliderPathingSize.getValue()+1)/2;
     }
-    
+   
     public int getPathingBrushMap()
     {
         return jComboBoxPathing.getSelectedIndex();
     }
     
+    public double getWaterBrushSize()
+    {
+        return (jSliderWaterSize.getValue()+1)/2;
+    }
+        
+  public void setWaterList(String[] array)
+  {
+      jListWater.setListData(array);
+  }
+  
+  public int getWater()
+  {
+      return jListWater.getSelectedIndex();
+  }
+          
+          
     public int getTexture()
     {
       //  System.out.println(jListTextures.getSelectedIndex());

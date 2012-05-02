@@ -50,6 +50,7 @@ import de.jpenguin.network.*;
 import de.jpenguin.engine.*;
 import de.jpenguin.input.*;
 import de.jpenguin.fog.FogOfWarModels;
+import de.jpenguin.loader.Loader;
 
 public class GameApplication extends SimpleApplication{
     
@@ -75,7 +76,6 @@ public class GameApplication extends SimpleApplication{
     private GameClient client;
     private GameServer server;
     
-    
     private final int TICKS_PER_SECOND = 25;
     private final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
     private final int MAX_FRAMESKIP = 5;
@@ -83,6 +83,9 @@ public class GameApplication extends SimpleApplication{
     
     private int loops;
     private long next_game_tick;
+    
+    private FilterPostProcessor postWater;
+    private Water water;
     
     public GameApplication(Game game, boolean multiplayer, String joinAdress,String playerId,int playerNumber,String map)
     {
@@ -170,6 +173,7 @@ public class GameApplication extends SimpleApplication{
             rootNode.attachChild(clickableNode);
           //  clickableNode.attachChild(createTerrain());
             loadTerrain();
+            loadWater();
             camera.addTerrain(terrain);
             
             loadingScreen.setProgress(0.6f, "Loading Doodads");
@@ -427,6 +431,17 @@ public class GameApplication extends SimpleApplication{
     }
     
     
+    public void loadWater()
+    {
+        water =Loader.load(assetManager, map, "water", false, Water.class);
+        if(water == null)
+        {
+            water = new Water();
+        }
+        water.init(this, terrain, null, rootNode);
+    }
+    
+    
     @Override
   public void destroy()
   {
@@ -491,6 +506,11 @@ public class GameApplication extends SimpleApplication{
       return client;
   }
     
+   public Water getWater()
+   {
+       return water;
+   }
+   
    /*
     public GameServer getServer()
   {

@@ -91,7 +91,7 @@ public class Model implements Savable {
         
             skeletonControl = model.getControl(SkeletonControl.class);
           //  model.setUserData("model",this);
-        }
+        
       //  model.updateModelBound();
         
         height = ((BoundingBox)model.getWorldBound()).getYExtent();
@@ -115,7 +115,7 @@ public class Model implements Savable {
             mat.setColor("Color", ColorRGBA.Blue);
             geom.setMaterial(mat);
         attachmentNode.attachChild(geom);
-         
+         }
         
         
      //   System.out.println("Höhe:"+((BoundingBox)model.getWorldBound()).getXExtent()+"|"+((BoundingBox)model.getWorldBound()).getYExtent()+"|"+((BoundingBox)model.getWorldBound()).getZExtent());
@@ -124,6 +124,9 @@ public class Model implements Savable {
     
     public void setColor(ColorRGBA color)
     {
+       if(model==null)
+            return;
+        
         List list = model.getChildren();
         for(int i=0;i<list.size();i++)
         {
@@ -292,11 +295,15 @@ public class Model implements Savable {
     
     public void setAnimation(String s)
     {
+        if(animControl==null)
+            return;
         animControl.setAnimation(s, false);
     }
     
     public void setAnimation(String s, float time)
     {
+        if(animControl==null)
+            return;
         animControl.setAnimation(s, time);
     }
     

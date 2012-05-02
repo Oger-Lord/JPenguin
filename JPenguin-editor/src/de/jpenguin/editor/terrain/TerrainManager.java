@@ -314,7 +314,7 @@ public class TerrainManager extends AbstractAppState{
         terrain.setMaterial(matTerrain);
         terrain.setLocalTranslation(0, 0, 0);
         terrain.setLocalScale(1f, 1f, 1f);
-        editorApp.getRootNode().attachChild(terrain);
+        editorApp.getSceneNode().attachChild(terrain);
 
         
          
@@ -545,7 +545,7 @@ public class TerrainManager extends AbstractAppState{
             imp.setAssetManager(editorApp.getAssetManager());
             terrain = (TerrainQuad) imp.load(new BufferedInputStream(fis));
             terrain.setShadowMode(ShadowMode.CastAndReceive);
-            editorApp.getRootNode().attachChild((Node)terrain);
+            editorApp.getSceneNode().attachChild((Node)terrain);
 
             float duration = (System.currentTimeMillis() - start) / 1000.0f;
             System.out.println("Load took " + duration + " seconds");
