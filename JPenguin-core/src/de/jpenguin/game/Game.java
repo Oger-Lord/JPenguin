@@ -113,7 +113,7 @@ public class Game {
         FogOfWar.setSize(512,512, gameApp.getTerrain().getTerrainSize());
         
         fogOfWar = new FogOfWarDisplay(this);
-        fogOfWar.addEffect(new FogOfWarTerrain(gameApp.getTerrain()));
+        fogOfWar.addEffect(new FogOfWarTerrain(gameApp.getTerrain(),gameApp.getWater()));
         fogOfWar.addEffect(new FogOfWarModels(fogOfWar,gameApp));
         fogOfWar.addEffect(new FogOfWarMinimap());
         fogOfWar.addEffect(new FogOfWarDoodads(gameApp.getDoodadNode(),gameApp.getTerrain().getTerrainSize()));
@@ -156,6 +156,8 @@ public class Game {
         pathingMap.getSubMap(PathingMap.MapGround).activateUnitPathfinding();
         pathingMap.getSubMap(PathingMap.MapAir).activateUnitPathfinding();
         pathingMap.getSubMap(PathingMap.MapWater).activateUnitPathfinding();
+        
+        gameApp.getWater().setPathingMap(pathingMap);
     }
     
     public void update(float tpf)

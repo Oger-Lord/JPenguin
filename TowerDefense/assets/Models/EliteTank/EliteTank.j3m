@@ -5,7 +5,6 @@ Material Leaves : Common/MatDefs/Light/Lighting.j3md {
     MaterialParameters {
         DiffuseMap : Models/EliteTank/EliteSiegeTank.png
         UseAlpha : true
-        AlphaDiscardThreshold : 0.5
         UseMaterialColors : false
         Ambient : 1.0 1.0 1.0 0.5
         Diffuse : 1.0 1.0 1.0 1.0

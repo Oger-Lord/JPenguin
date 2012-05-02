@@ -123,8 +123,8 @@ public class PathingMap implements Savable {
             FileOutputStream fos = new FileOutputStream(new File(mappath+"pathingmap.jme"));
             BinaryExporter.getInstance().save(pathingMap, new BufferedOutputStream(fos));
             
-            fos = new FileOutputStream(new File(mappath+"pathingmap.xml"));
-            XMLExporter.getInstance().save(pathingMap, new BufferedOutputStream(fos));
+          //  fos = new FileOutputStream(new File(mappath+"pathingmap.xml"));
+          //  XMLExporter.getInstance().save(pathingMap, new BufferedOutputStream(fos));
             
         }catch(Exception e){System.out.println("Error Saving PathingMap; " + e.getMessage());}
     }

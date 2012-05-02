@@ -24,6 +24,7 @@ import java.io.*;
 import com.jme3.asset.plugins.FileLocator;
 
 import com.jme3.renderer.queue.RenderQueue.ShadowMode;
+import com.jme3.scene.Node;
 
 import de.jpenguin.editor.pathing.PathingManager;
 import de.jpenguin.editor.terrain.TerrainManager;
@@ -50,11 +51,14 @@ public class EditorApplication extends SimpleApplication {
     private TypeXMLManager typeXML;
     
     private EditorCam camera;
+    
+    private Node sceneNode;
 
     
     @Override
     public void simpleInitApp() {
-        
+        sceneNode = new Node("sceneNode");
+        rootNode.attachChild(getSceneNode());
         
         flyCam.setEnabled(false);
         
@@ -105,7 +109,7 @@ public class EditorApplication extends SimpleApplication {
         objectManager.setTypeXML(typeXML);
         terrainManager.setTool(tools);
         pathingManager = new PathingManager(tools);
-        waterManager = new WaterManager();
+        waterManager = new WaterManager(tools);
         
         stateManager.attach(objectManager);
         stateManager.attach(terrainManager);
@@ -124,6 +128,13 @@ public class EditorApplication extends SimpleApplication {
     public void updateType(String typename,String name, String value)
     {
          enqueue(new updateTypeCallable(typename,name,value));
+    }
+
+    /**
+     * @return the sceneNode
+     */
+    public Node getSceneNode() {
+        return sceneNode;
     }
     
     public class updateTypeCallable implements Callable
@@ -312,14 +323,24 @@ public class EditorApplication extends SimpleApplication {
                     terrainManager.setEnabled(true);
                     objectManager.setEnabled(false);
                     pathingManager.setEnabled(false);
+                    waterManager.setEnabled(false);
+                    
                 }else if(name.equals("Objects")){
                     terrainManager.setEnabled(false);
                     objectManager.setEnabled(true);
                     pathingManager.setEnabled(false);
-                }else{
+                    waterManager.setEnabled(false);
+                    
+                }else if(name.equals("Pathing")){
                     terrainManager.setEnabled(false);
                     objectManager.setEnabled(false);
                     pathingManager.setEnabled(true);
+                    waterManager.setEnabled(false);
+                }else{
+                    terrainManager.setEnabled(false);
+                    objectManager.setEnabled(false);
+                    pathingManager.setEnabled(false);
+                    waterManager.setEnabled(true);
                 }
                 
                 return null;
@@ -367,8 +388,6 @@ public class EditorApplication extends SimpleApplication {
         objectManager.loseFocus();
         camera.loseFocus();
     }
-    
-    
 
 
 }

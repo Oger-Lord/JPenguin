@@ -4,18 +4,18 @@
         <MapEntry key='bush'>
             <Savable class='de.jpenguin.editor.object.DoodadType' name='bush' savable_versions='0'>
                 <doodads size='6'>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@280236390' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad height='4.499713' highLocked='true' reference_ID='de.jpenguin.editor.object.Doodad@1715060328' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-8.0' z='34.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@280236390'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1625050241' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1715060328'/>
+                    <de.jpenguin.editor.object.Doodad height='4.3996916' highLocked='true' reference_ID='de.jpenguin.editor.object.Doodad@1551254927' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' x='-4.0' z='34.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1625050241'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@692905451' savable_versions='0'>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1551254927'/>
+                    <de.jpenguin.editor.object.Doodad height='4.4004908' highLocked='true' reference_ID='de.jpenguin.editor.object.Doodad@2026728096' savable_versions='0'>
                         <location class='com.jme3.math.Vector3f' savable_versions='0' z='34.0'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@692905451'/>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@2026728096'/>
                 </doodads>
             </Savable>
         </MapEntry>
@@ -31,14 +31,14 @@
         <MapEntry key='needleTree'>
             <Savable class='de.jpenguin.editor.object.DoodadType' name='needleTree' savable_versions='0'>
                 <doodads size='4'>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1617610261' savable_versions='0'>
-                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='22.36485' z='35.111156'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1736111214' savable_versions='0'>
+                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='22.36485' y='5.058676' z='35.111156'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1617610261'/>
-                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@1738666864' savable_versions='0'>
-                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='28.491037' z='23.793344'/>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1736111214'/>
+                    <de.jpenguin.editor.object.Doodad reference_ID='de.jpenguin.editor.object.Doodad@129079123' savable_versions='0'>
+                        <location class='com.jme3.math.Vector3f' savable_versions='0' x='28.491037' y='5.058676' z='23.793344'/>
                     </de.jpenguin.editor.object.Doodad>
-                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@1738666864'/>
+                    <de.jpenguin.editor.object.Doodad ref='de.jpenguin.editor.object.Doodad@129079123'/>
                 </doodads>
             </Savable>
         </MapEntry>

@@ -106,7 +106,7 @@ public class ObjectManager extends AbstractAppState{
        editorApp.getInputManager().addListener(actionListener, "mouseClickLeft","mouseClickRight","delete","movetop","movebottom","strg");
        
        myRootNode=new Node("myRootNode");
-       editorApp.getRootNode().attachChild(myRootNode);
+       editorApp.getSceneNode().attachChild(myRootNode);
        
       doodadTypes = new Hashtable<String,DoodadType>();
       
@@ -348,9 +348,9 @@ public class ObjectManager extends AbstractAppState{
     
    public synchronized void clear()
    {
-       editorApp.getRootNode().detachChild(myRootNode);
+       editorApp.getSceneNode().detachChild(myRootNode);
        myRootNode=new Node("myRootNode");
-       editorApp.getRootNode().attachChild(myRootNode);
+       editorApp.getSceneNode().attachChild(myRootNode);
        
         Enumeration e = doodadTypes.keys();
         while (e.hasMoreElements()) {

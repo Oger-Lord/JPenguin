@@ -266,7 +266,7 @@ public class SettingManager extends AbstractAppState {
                     editorApp.getRootNode().addLight(al);
                 }
                 editorApp.getRootNode().addLight(dl);
-                editorApp.getRootNode().attachChild(sky);
+                editorApp.getSceneNode().attachChild(sky);
                 
                 editorApp.getWaterManager().hide(false);
             }else{
@@ -278,7 +278,7 @@ public class SettingManager extends AbstractAppState {
                 editorApp.getViewPort().removeProcessor(basicRenderer);
                 editorApp.getRootNode().removeLight(al);
                 editorApp.getRootNode().removeLight(dl);
-                editorApp.getRootNode().detachChild(sky);
+                editorApp.getSceneNode().detachChild(sky);
             }
                     
             return null;

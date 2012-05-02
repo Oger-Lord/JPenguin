@@ -63,6 +63,7 @@ import de.jpenguin.editor.engine.Undo;
 import de.jpenguin.editor.terrain.tools.*;
 import com.jme3.shader.VarType;
 import com.jme3.renderer.queue.RenderQueue.ShadowMode;
+import com.jme3.texture.Image.Format;
 
 import java.util.concurrent.Callable;
 import java.awt.AlphaComposite;
@@ -314,7 +315,7 @@ public class TerrainManager extends AbstractAppState{
         terrain.setMaterial(matTerrain);
         terrain.setLocalTranslation(0, 0, 0);
         terrain.setLocalScale(1f, 1f, 1f);
-        editorApp.getRootNode().attachChild(terrain);
+        editorApp.getSceneNode().attachChild(terrain);
 
         
          
@@ -507,7 +508,8 @@ public class TerrainManager extends AbstractAppState{
             TerrainQuad newTerrain = terrain.clone();
             
             Material m = newTerrain.getMaterial();
-            m.setTexture("PathingMap", new Texture2D());
+            
+            m.clearParam("PathingMap");
             m.setInt("GridSize", 0);
             m.setColor("GridColor", ColorRGBA.White);
             newTerrain.setMaterial(m);
@@ -545,7 +547,7 @@ public class TerrainManager extends AbstractAppState{
             imp.setAssetManager(editorApp.getAssetManager());
             terrain = (TerrainQuad) imp.load(new BufferedInputStream(fis));
             terrain.setShadowMode(ShadowMode.CastAndReceive);
-            editorApp.getRootNode().attachChild((Node)terrain);
+            editorApp.getSceneNode().attachChild((Node)terrain);
 
             float duration = (System.currentTimeMillis() - start) / 1000.0f;
             System.out.println("Load took " + duration + " seconds");

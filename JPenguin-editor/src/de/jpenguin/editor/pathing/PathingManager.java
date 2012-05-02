@@ -64,7 +64,7 @@ public class PathingManager extends AbstractAppState{
     
     private boolean hide=true;
     private Image image;
-    private Image emptyImage;
+  //  private Image emptyImage;
     private DrawPathingImage drawImage;
     
     private PathingMap pathingMap;
@@ -107,7 +107,7 @@ public class PathingManager extends AbstractAppState{
        
        editorApp.getInputManager().addListener(actionListener, "change","mouseClickPathing");
        
-       emptyImage =new Image(Format.RGBA8,4,4,ByteBuffer.allocateDirect(4*4*4));
+    //   emptyImage =new Image(Format.RGBA8,4,4,ByteBuffer.allocateDirect(4*4*4));
    }
     
        private ActionListener actionListener = new ActionListener() {
@@ -153,10 +153,15 @@ public class PathingManager extends AbstractAppState{
                         terrain.setMaterial(m);
                        // editorApp.getRootNode().attachChild(terrain);
                     }else{
-                        Texture texture = new Texture2D();
-                        texture.setImage(emptyImage);
+                        
+                        
+                       // Texture texture = new Texture2D();
+                       // texture.setImage(emptyImage);
                         Material m =terrain.getMaterial();
-                        m.setTexture("PathingMap", texture);
+                        //m.setTexture("PathingMap", texture);
+                        m.clearParam("PathingMap");
+                        
+                        
                         terrain.setMaterial(m);
                         hide=true;
                       //  editorApp.getRootNode().detachChild(terrain);
