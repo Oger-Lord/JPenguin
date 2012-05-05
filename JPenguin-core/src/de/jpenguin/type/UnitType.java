@@ -33,6 +33,7 @@ public class UnitType extends Type{
     private String[] abilities;
     private float sightRadius;
     private float selectionSize;
+    private int pathingType;
     
     public UnitType()
    {
@@ -74,6 +75,7 @@ public class UnitType extends Type{
         mana   = capsule.readFloat(   "mana",   0);
         sightRadius  = capsule.readFloat(   "sightRadius",   20);
         selectionSize  = capsule.readFloat(   "selectionSize",   1);
+        pathingType  = capsule.readInt(   "pathingType",   0);
         
         String test = capsule.readString(   "abilities",   null);
         if(test != null)

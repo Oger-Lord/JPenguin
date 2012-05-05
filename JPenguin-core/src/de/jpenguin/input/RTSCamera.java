@@ -4,16 +4,20 @@
  */
 package de.jpenguin.input;
 
+import com.jme3.collision.CollisionResult;
+import com.jme3.collision.CollisionResults;
 import com.jme3.collision.MotionAllowedListener;
 import com.jme3.input.*;
 import com.jme3.input.controls.*;
 import com.jme3.math.FastMath;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.math.Vector2f;
 import com.jme3.renderer.Camera;
 import com.jme3.terrain.geomipmap.TerrainQuad;
+import de.jpenguin.engine.Water;
 
 /**
  *
@@ -35,6 +39,8 @@ public class RTSCamera implements ActionListener {
     private boolean mouseIsActivated=false;
     
     private TerrainQuad terrain;
+    private Water water;
+    
     private float distance=22;
     
     public RTSCamera(Camera cam)
@@ -72,6 +78,11 @@ public class RTSCamera implements ActionListener {
     public void addTerrain(TerrainQuad terrain)
     {
         this.terrain=terrain;
+    }
+    
+    public void addWater(Water water)
+    {
+        this.water=water;
     }
     
     public void setTranslation(float x, float y)
@@ -121,7 +132,7 @@ public class RTSCamera implements ActionListener {
         if (!enabled)
             return;
         
-        Vector3f v = cam.getLocation();
+        Vector3f v = cam.getLocation().clone();
         
         float cameraX = inputManager.getCursorPosition().getX();
         float cameraY = inputManager.getCursorPosition().getY();        
@@ -161,17 +172,53 @@ public class RTSCamera implements ActionListener {
         
         if(terrain != null)
         {
-            Vector2f v2 = new Vector2f();
-            v2.set(v.getX(), v.getZ());
-            v.setY(terrain.getHeight(v2)+distance);
+            Vector3f v3f =getWorldIntersection(new Vector2f(cam.getHeight()/2,cam.getWidth()/2 ));
+            
+          //  Vector2f v2 = new Vector2f();
+         //   v2.set(v.getX(), v.getZ());
+           // v.setY(terrain.getHeight(v2)+distance);
+            v.setY(v3f.getY()+distance);
            // System.out.println(v.getZ() +" "+v.getX() + " " +f);
         }else{
             v.setY(distance);
         }
         
         
-        
         cam.setLocation(v);
+    }
+    
+    
+    
+    
+   public Vector3f getWorldIntersection(Vector2f input) {
+        Vector3f origin    = cam.getWorldCoordinates(input, 0.0f);
+        Vector3f direction = cam.getWorldCoordinates(input, 0.3f);
+        direction.subtractLocal(origin).normalizeLocal();
+
+        Ray ray = new Ray(origin, direction);
+        CollisionResults results = new CollisionResults();
+        
+        Vector3f v3f=null;
+        
+        if(terrain != null)
+        {
+            int numCollisions = terrain.collideWith(ray, results);
+            if (numCollisions > 0) {
+                CollisionResult hit = results.getClosestCollision();
+                v3f= hit.getContactPoint();
+            }
+        }
+        
+        if(water !=  null)
+        {
+            Vector3f waterv = water.collision(ray);
+            if(waterv != null && (v3f==null || waterv.distance(origin) < v3f.distance(origin)))
+            {
+                v3f=waterv;
+            }
+        }
+        
+        return v3f;
     }
 
     

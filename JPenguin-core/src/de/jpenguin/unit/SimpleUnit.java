@@ -112,6 +112,8 @@ public class SimpleUnit extends Unit{
         {
             player.getFogOfWarPlayer().setSight((float)sightRadius, location.getX(), location.getZ(), true);
         }
+        
+        location.setY(game.getGameApplication().getTerrain().getHeight(new Vector2f(location.getX(),location.getZ())));
        
         model.setTranslation(location);
         model.setRotation(rotation);

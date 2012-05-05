@@ -15,6 +15,7 @@ import com.jme3.export.Savable;
 import com.jme3.export.binary.BinaryExporter;
 import com.jme3.export.binary.BinaryImporter;
 import com.jme3.export.xml.XMLExporter;
+import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
@@ -184,6 +185,41 @@ public class Water implements Savable{
         
         postWater.removeFilter(wt.getWaterFilter());
     }
+    
+    
+    public Vector3f collision(Ray ray)
+    {
+        Vector3f firstPoint=null;
+        float shortestDistance = -1;
+        
+        for(int i=0;i<waterTypes.size();i++)
+        {
+            WaterType wt = waterTypes.get(i);
+            float a = (wt.getWaterHeight()-ray.getOrigin().y)/ray.getDirection().y;
+            
+            if(a > 0)
+            {
+                float x = ray.getOrigin().x + a*ray.getDirection().x;
+                float y = ray.getOrigin().z + a*ray.getDirection().z;
+                
+                if(wt.isAtThisPosition(x, y, width, height))
+                {
+                    Vector3f v3f= new Vector3f(x,wt.getWaterHeight(),y);
+                    
+                    float shortest=v3f.distance(ray.getOrigin());
+                    
+                    if(shortestDistance == -1 || shortestDistance > shortest)
+                    {
+                        firstPoint = v3f;
+                        shortestDistance = shortest;
+                    }
+                }
+            }
+        }
+        
+        return firstPoint;
+    }
+    
     
     public void clear()
     {

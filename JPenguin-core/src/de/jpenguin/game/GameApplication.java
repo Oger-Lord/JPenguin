@@ -175,6 +175,7 @@ public class GameApplication extends SimpleApplication{
             loadTerrain();
             loadWater();
             camera.addTerrain(terrain);
+            camera.addWater(water);
             
             loadingScreen.setProgress(0.6f, "Loading Doodads");
         }else if(pos==3)

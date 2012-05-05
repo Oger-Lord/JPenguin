@@ -133,6 +133,9 @@ public class WaterType implements Savable{
         int x = (int)((fx+(width/2))/4+0.5);
         int y = (int)((fy+(height/2))/4+0.5);
         
+        if(x<0 || y<0 || x >= width/4 || y >= height/4)
+            return false;
+        
         return enabledArray[x][y];
     }
     
@@ -295,6 +298,13 @@ public class WaterType implements Savable{
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the waterHeight
+     */
+    public float getWaterHeight() {
+        return waterHeight;
     }
     
 }

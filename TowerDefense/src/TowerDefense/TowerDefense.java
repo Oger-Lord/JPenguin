@@ -37,7 +37,7 @@ public class TowerDefense implements MyGame{
         
         new Building(game,"tower","p2",20,20,0);
         
-        new SimpleUnit(game,"deepone","p1",4,4,0);
+        new SimpleUnit(game,"dolphin","p1",4,4,0);
         new SimpleUnit(game,"atst","p1",0,0,0);
         new SimpleUnit(game,"tank","p2",0,20,0);
         

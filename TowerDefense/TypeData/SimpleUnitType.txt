@@ -17,3 +17,4 @@ abilities
 collisionSize
 sightRadius
 selectionSize
+pathingType
