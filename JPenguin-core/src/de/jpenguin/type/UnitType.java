@@ -203,4 +203,11 @@ public class UnitType extends Type{
     public float getSelectionSize() {
         return selectionSize;
     }
+
+    /**
+     * @return the pathingType
+     */
+    public int getPathingType() {
+        return pathingType;
+    }
 }

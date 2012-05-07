@@ -39,12 +39,13 @@ public class PathingMap implements Savable {
     public static final int LayerUnit = 1;
     public static final int LayerWater = 2;
     public static final int LayerEditor = 3;
-    
+    public static final int LayerCameraBounds= 4;
     
     public static final int MapGround = 0;
     public static final int MapAir = 1;
     public static final int MapBuilding= 2;
     public static final int MapWater = 3;
+    
     
     public PathingMap()
     {

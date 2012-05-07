@@ -170,6 +170,11 @@ public class SubPathingMap implements Savable {
     }
      * 
      */
+    
+    public boolean isUnitPathfinding()
+    {
+        return searchIsActive;
+    }
 
 
     public void write(JmeExporter ex) throws IOException {

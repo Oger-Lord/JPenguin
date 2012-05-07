@@ -14,7 +14,7 @@ varying vec3 SpecularSum;
 
 #ifndef VERTEX_LIGHTING
   uniform vec4 g_LightDirection;
-  varying vec3 vPosition;
+  //varying vec3 vPosition;
   varying vec3 vViewDir;
   varying vec4 vLightDir;
   varying vec3 lightVec;
@@ -47,15 +47,13 @@ varying vec3 SpecularSum;
   varying vec3 vNormal;
 #endif
 
-#ifdef KEYMAP
-  uniform vec4 m_KeyColor;
+#ifdef ALPHAMAP
+  uniform sampler2D m_AlphaMap;
 #endif
 
 #ifdef COLORRAMP
   uniform sampler2D m_ColorRamp;
 #endif
-
-uniform float m_AlphaDiscardThreshold;
 
 #ifndef VERTEX_LIGHTING
 uniform float m_Shininess;
@@ -70,6 +68,10 @@ uniform vec4 g_LightPosition;
     varying vec4 refVec;
 
     uniform ENVMAP m_EnvMap;
+#endif
+
+#ifdef KEYMAP
+  uniform vec4 m_KeyColor;
 #endif
 
 float tangDot(in vec3 v1, in vec3 v2){
@@ -116,7 +118,7 @@ float lightComputeSpecular(in vec3 norm, in vec3 viewdir, in vec3 lightdir, in f
     #endif
 }
 
-vec2 computeLighting(in vec3 wvPos, in vec3 wvNorm, in vec3 wvViewDir, in vec3 wvLightDir){
+vec2 computeLighting(in vec3 wvNorm, in vec3 wvViewDir, in vec3 wvLightDir){
    float diffuseFactor = lightComputeDiffuse(wvNorm, wvLightDir, wvViewDir);
    float specularFactor = lightComputeSpecular(wvNorm, wvViewDir, wvLightDir, m_Shininess);
 
@@ -125,6 +127,10 @@ vec2 computeLighting(in vec3 wvPos, in vec3 wvNorm, in vec3 wvViewDir, in vec3 w
    #else
     float att = vLightDir.w;
    #endif
+
+   if (m_Shininess <= 1.0) {
+       specularFactor = 0.0; // should be one instruction on most cards ..
+   }
 
    specularFactor *= diffuseFactor;
 
@@ -164,20 +170,10 @@ void main(){
       vec4 diffuseColor = vec4(1.0);
     #endif
 
-    #ifdef KEYMAP
-      vec4 keyColor = m_KeyColor;
-      diffuseColor.rgb = diffuseColor.rgb + (1-diffuseColor.a) * keyColor.rgb;
-      diffuseColor.a = 1;
-    #endif
-
-    float alpha = 1;
-/*
     float alpha = DiffuseSum.a * diffuseColor.a;
-
-    if(alpha < m_AlphaDiscardThreshold){
-        discard;
-    }
-*/
+    #ifdef ALPHAMAP
+       alpha = alpha * texture2D(m_AlphaMap, newTexCoord).r;
+    #endif  
 
     #ifndef VERTEX_LIGHTING
         float spotFallOff = 1.0;
@@ -214,7 +210,7 @@ void main(){
     // ***********************
     #if defined(NORMALMAP) && !defined(VERTEX_LIGHTING)
       vec4 normalHeight = texture2D(m_NormalMap, newTexCoord);
-      vec3 normal = (normalHeight.xyz * vec3(2.0) - vec3(1.0));
+      vec3 normal = normalize((normalHeight.xyz * vec3(2.0) - vec3(1.0)));
       #ifdef LATC
         normal.z = sqrt(1.0 - (normal.x * normal.x) - (normal.y * normal.y));
       #endif
@@ -256,8 +252,9 @@ void main(){
     #else
        vec4 lightDir = vLightDir;
        lightDir.xyz = normalize(lightDir.xyz);
+       vec3 viewDir = normalize(vViewDir);
 
-       vec2   light = computeLighting(vPosition, normal, vViewDir.xyz, lightDir.xyz) * spotFallOff;
+       vec2   light = computeLighting(normal, viewDir, lightDir.xyz) * spotFallOff;
        #ifdef COLORRAMP
            diffuseColor.rgb  *= texture2D(m_ColorRamp, vec2(light.x, 0.0)).rgb;
            specularColor.rgb *= texture2D(m_ColorRamp, vec2(light.y, 0.0)).rgb;
@@ -280,5 +277,14 @@ void main(){
                            DiffuseSum.rgb   * diffuseColor.rgb  * vec3(light.x) +
                            SpecularSum2.rgb * specularColor.rgb * vec3(light.y);
     #endif
+
     gl_FragColor.a = alpha;
+
+    #ifdef KEYMAP
+      vec4 keyColor = m_KeyColor;
+      gl_FragColor.rgb = gl_FragColor.rgb + (1-gl_FragColor.a) * keyColor.rgb;
+      gl_FragColor.a = 1;
+    #endif
+
+    
 }

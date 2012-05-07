@@ -54,11 +54,14 @@ import de.jpenguin.loader.Loader;
 
 public class GameApplication extends SimpleApplication{
     
+    private Node nonreflectNode;
+    private Node reflectNode;
     private Node clickableNode;
+    private Node doodadNode;
+    
     
     private Game game;
     private TerrainQuad terrain;
-    private Node doodadNode;
     
    // private PssmShadowRenderer pssmRenderer;
     
@@ -84,7 +87,6 @@ public class GameApplication extends SimpleApplication{
     private int loops;
     private long next_game_tick;
     
-    private FilterPostProcessor postWater;
     private Water water;
     
     public GameApplication(Game game, boolean multiplayer, String joinAdress,String playerId,int playerNumber,String map)
@@ -163,17 +165,25 @@ public class GameApplication extends SimpleApplication{
             loadingScreen.setProgress(0.1f, "Making Light");
         }else if(pos==1){
 
-
+            loadShadow();
             loadLight();
+            
             loadingScreen.setProgress(0.2f, "Loading Terrain");
             
         }else if(pos==2)
         {
-            clickableNode = new Node();
-            rootNode.attachChild(clickableNode);
+            reflectNode = new Node("reflect");
+            rootNode.attachChild(reflectNode);
+            nonreflectNode = new Node("non reflect");
+            rootNode.attachChild(nonreflectNode);
+            
+            clickableNode = new Node("clickable");
+            reflectNode.attachChild(clickableNode);
           //  clickableNode.attachChild(createTerrain());
             loadTerrain();
             loadWater();
+            
+            
             camera.addTerrain(terrain);
             camera.addWater(water);
             
@@ -234,16 +244,32 @@ public class GameApplication extends SimpleApplication{
         CollisionResults results = new CollisionResults();
         clickableNode.collideWith(ray, results);
         
+        Vector3f v3f=null;
+        Model m = null;
+        
         if (results.size() > 0) {
                     
              CollisionResult closest = results.getClosestCollision();
              Geometry g =closest.getGeometry();
              
-             Model m = Model.Geometry2Model(g);
+             v3f = closest.getContactPoint();
+              m = Model.Geometry2Model(g);
                     
-             return new MouseStatus(m,closest.getContactPoint().getX(),closest.getContactPoint().getZ());
-             
+            // return new MouseStatus(m,closest.getContactPoint().getX(),closest.getContactPoint().getZ());
         }
+        
+        if(water !=  null)
+        {
+            Vector3f waterv = water.collision(ray);
+            if(waterv != null && (v3f==null || waterv.distance(origin) < v3f.distance(origin)))
+            {
+                v3f=waterv;
+            }
+        }
+        
+        if(v3f != null)
+            return new MouseStatus(m,v3f.getX(),v3f.getZ());
+        
         return null;
     }
 
@@ -302,12 +328,12 @@ public class GameApplication extends SimpleApplication{
     protected void makeLight() {
         AmbientLight al = new AmbientLight();
         al.setColor(ColorRGBA.White.mult(2));
-        rootNode.addLight(al);
+        reflectNode.addLight(al);
 
         DirectionalLight dl1 = new DirectionalLight();
         dl1.setDirection(new Vector3f(0.98f, -0.98f, 0.94f).normalizeLocal());
         dl1.setColor(new ColorRGBA(0.965f, 0.949f, 0.772f, 1f).mult(0.7f));
-        rootNode.addLight(dl1);
+        reflectNode.addLight(dl1);
     }
     
   
@@ -368,7 +394,7 @@ public class GameApplication extends SimpleApplication{
           
           
            
-          rootNode.attachChild(doodadNode);
+          reflectNode.attachChild(doodadNode);
         } catch (IOException ex) {
         //  Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "No saved node loaded.", ex);
         }
@@ -382,18 +408,6 @@ public class GameApplication extends SimpleApplication{
             imp.setAssetManager(assetManager);
             
             
-            PssmShadowRenderer pssmRenderer = new PssmShadowRenderer(assetManager, 1024*2, 1);
-            pssmRenderer.setDirection(new Vector3f(-1, -1, -1).normalizeLocal());
-            pssmRenderer.setLambda(0.55f);
-            pssmRenderer.setShadowIntensity(0.7f);
-            pssmRenderer.setCompareMode(CompareMode.Software);
-            pssmRenderer.setFilterMode(FilterMode.PCF4    );
-           // pssmRenderer.displayDebug();
-            viewPort.addProcessor(pssmRenderer);
-         
-            
-            
-            
         try{
             InputStream fis = assetManager.locateAsset(new AssetKey("Scenes/"+map+"/directlightsave.xml")).openStream();
             DirectionalLight dl = (DirectionalLight) imp.load(new BufferedInputStream(fis));
@@ -403,7 +417,7 @@ public class GameApplication extends SimpleApplication{
         try{
             InputStream fis = assetManager.locateAsset(new AssetKey("Scenes/"+map+"/ambientlightsave.xml")).openStream();
             AmbientLight al = (AmbientLight) imp.load(new BufferedInputStream(fis));  
-             rootNode.addLight(al);
+            rootNode.addLight(al);
         }catch(Exception e){}
             
         try{
@@ -415,9 +429,7 @@ public class GameApplication extends SimpleApplication{
             viewPort.addProcessor(fpp);
         }catch(Exception e){}
         
-               
-
-         
+              
              
            /*
         try{
@@ -427,8 +439,18 @@ public class GameApplication extends SimpleApplication{
         }catch(Exception e){} 
          * 
          */
-
-
+    }
+    
+    public void loadShadow()
+    {
+            PssmShadowRenderer pssmRenderer = new PssmShadowRenderer(assetManager, 1024*2, 1);
+            pssmRenderer.setDirection(new Vector3f(-1, -1, -1).normalizeLocal());
+            pssmRenderer.setLambda(0.55f);
+            pssmRenderer.setShadowIntensity(0.7f);
+            pssmRenderer.setCompareMode(CompareMode.Software);
+            pssmRenderer.setFilterMode(FilterMode.PCF4    );
+           // pssmRenderer.displayDebug();
+            viewPort.addProcessor(pssmRenderer);
     }
     
     
@@ -441,7 +463,7 @@ public class GameApplication extends SimpleApplication{
         {
             water = new Water();
         }
-        water.init(this, terrain, null, rootNode);
+        water.init(this, terrain, null, reflectNode);
     }
     
     
@@ -522,6 +544,20 @@ public class GameApplication extends SimpleApplication{
   }
     * 
     */
+
+    /**
+     * @return the nonreflectNode
+     */
+    public Node getNonreflectNode() {
+        return nonreflectNode;
+    }
+
+    /**
+     * @return the reflectNode
+     */
+    public Node getReflectNode() {
+        return reflectNode;
+    }
 }
 
        

@@ -20,6 +20,7 @@ import de.jpenguin.engine.*;
 import de.jpenguin.type.*;
 import de.jpenguin.game.*;
 import de.jpenguin.missile.*;
+import de.jpenguin.pathing.SubPathingMap;
 import de.jpenguin.unit.event.*;
 
 public abstract class Unit implements Savable,ModelClick{

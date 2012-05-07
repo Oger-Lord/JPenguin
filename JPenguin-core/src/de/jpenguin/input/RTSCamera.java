@@ -120,8 +120,10 @@ public class RTSCamera implements ActionListener {
         }
         
         if (name.equals("RTSCAM_ZoomIn")){
-            distance-=scrollSpeed*tpf;
+            if(distance-scrollSpeed*tpf > 5)
+                distance-=scrollSpeed*tpf;
         }else if (name.equals("RTSCAM_ZoomOut")){
+            if(distance+scrollSpeed*tpf < 40)
             distance+=scrollSpeed*tpf;
         }
     }
@@ -177,7 +179,8 @@ public class RTSCamera implements ActionListener {
           //  Vector2f v2 = new Vector2f();
          //   v2.set(v.getX(), v.getZ());
            // v.setY(terrain.getHeight(v2)+distance);
-            v.setY(v3f.getY()+distance);
+            if(v3f != null)
+                 v.setY(v3f.getY()+distance);
            // System.out.println(v.getZ() +" "+v.getX() + " " +f);
         }else{
             v.setY(distance);

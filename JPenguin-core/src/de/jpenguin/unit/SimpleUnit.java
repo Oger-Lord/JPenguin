@@ -20,6 +20,7 @@ import de.jpenguin.engine.*;
 import de.jpenguin.type.*;
 import de.jpenguin.game.*;
 import de.jpenguin.missile.*;
+import de.jpenguin.pathing.SubPathingMap;
 import de.jpenguin.unit.event.*;
 
 public class SimpleUnit extends Unit{
@@ -39,6 +40,77 @@ public class SimpleUnit extends Unit{
         init(game,unitType,p,x,y,rotation);
         
         this.collision = unitType.getCollisionSize();
+        
+        Vector2f v2f =findSpace(x,y);
+        
+        location = new Vector3f(v2f.x,0,v2f.y);
+        
+        if(unitType.getPathingType() != 3)
+        {
+            location.setY(game.getGameApplication().getTerrain().getHeight(v2f));
+        }else{
+            location.setY(game.getGameApplication().getWater().getHeight(v2f.x,v2f.y));
+        }
+        model.setTranslation(location);
+    }
+    
+    
+    private Vector2f findSpace(float x, float y)
+    {
+       //Find space
+        SubPathingMap spm = game.getPathingMap().getSubMap(unitType.getPathingType());
+        if (spm.isUnitPathfinding())
+        {
+            int ix =spm.convertX(x);
+            int iy =spm.convertY(y);
+            
+            if(spm.hasSpaceDirect(ix, iy, (int)(collision+0.5)))
+                return new Vector2f(x,y);
+            
+            for(int i=0;i<20*spm.getScale();i++)
+            {
+                //North
+                if(iy-i >= 0)
+                {
+                    for(int a=ix-i-1;a<ix+2+i;a++)
+                    {
+                        if(spm.hasSpaceDirect(a, iy-i, (int)(collision+0.5)))
+                            return new Vector2f(spm.convertX(a),spm.convertY(iy-i));
+                    }
+                }
+                
+                //South
+                if(iy+i < spm.getHeight())
+                {
+                    for(int a=ix-i-1;a<ix+2+i;a++)
+                    {
+                        if(spm.hasSpaceDirect(a, iy+i, (int)(collision+0.5)))
+                            return new Vector2f(spm.convertX(a),spm.convertY(iy+i));
+                    }
+                }
+                
+                //West
+                if(ix-i >= 0)
+                {
+                    for(int a=iy-i-1;a<iy+2+i;a++)
+                    {
+                        if(spm.hasSpaceDirect(ix-i,a, (int)(collision+0.5)))
+                            return new Vector2f(spm.convertX(ix-i),spm.convertY(a));
+                    }
+                }
+                    
+                //East
+                if(ix-i < spm.getWidth())
+                {
+                    for(int a=iy-i-1;a<iy+2+i;a++)
+                    {
+                        if(spm.hasSpaceDirect(ix+i,a, (int)(collision+0.5)))
+                            return new Vector2f(spm.convertX(ix+i),spm.convertY(a));
+                    }
+                }
+            }
+        }
+        return new Vector2f(x,y);      
     }
     
     public void setRotation(float r)
@@ -67,8 +139,14 @@ public class SimpleUnit extends Unit{
 
         
         location = location.add(v3f); 
-        location.setY(game.getGameApplication().getTerrain().getHeight(new Vector2f(location.getX(),location.getZ())));
         
+        if(unitType.getPathingType() != 3)
+        {
+            location.setY(game.getGameApplication().getTerrain().getHeight(new Vector2f(location.getX(),location.getZ())));
+        }else{
+            location.setY(game.getGameApplication().getWater().getHeight(location.getX(),location.getZ()));
+        }
+            
         if(game.getControllerPlayer().shareVision(player))
         {
             player.getFogOfWarPlayer().setSight((float)sightRadius, location.getX(), location.getZ(), true);
@@ -113,7 +191,13 @@ public class SimpleUnit extends Unit{
             player.getFogOfWarPlayer().setSight((float)sightRadius, location.getX(), location.getZ(), true);
         }
         
-        location.setY(game.getGameApplication().getTerrain().getHeight(new Vector2f(location.getX(),location.getZ())));
+        
+        if(unitType.getPathingType() != 3)
+        {
+            location.setY(game.getGameApplication().getTerrain().getHeight(new Vector2f(location.getX(),location.getZ())));
+        }else{
+            location.setY(game.getGameApplication().getWater().getHeight(location.getX(),location.getZ()));
+        }
        
         model.setTranslation(location);
         model.setRotation(rotation);

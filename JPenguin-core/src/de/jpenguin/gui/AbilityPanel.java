@@ -96,7 +96,7 @@ public class AbilityPanel implements Controller {
          }
          
            ap.hintController=screen.findControl("hintPanel", HintController.class);
-         
+           
          return ap;
     }
     
@@ -168,10 +168,12 @@ public class AbilityPanel implements Controller {
 	final Properties parameter,
 	final Attributes controlDefinitionAttributes) {
           
+           System.out.println("123 " + nifty.getGlobalProperties().get("test"));
       }
       
       // @Override
     public void init(final Properties parameter, final Attributes controlDefinitionAttributes) {
+       
     }
 
   

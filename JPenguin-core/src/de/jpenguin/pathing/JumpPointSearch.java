@@ -158,19 +158,21 @@ public class JumpPointSearch {
     {
         ArrayList<Vector3f> list = new ArrayList();
                 
-        list.add(new Vector3f(endX,0,endY));
+        
             
-        SearchNode current = found;
+        SearchNode current = found;//.getParent();
 
         while(current != null)
         {
           //  if(current.isSkip()==false)
           //  {
-                list.add(new Vector3f(subPathingMap.convertIntX(current.getX()),0,subPathingMap.convertIntY(current.getY())));
+                list.add(0,new Vector3f(subPathingMap.convertIntX(current.getX()),0,subPathingMap.convertIntY(current.getY())));
           //  }
             
             current = current.getParent();
         }
+        
+        list.add(new Vector3f(endX,0,endY));
         
         return list;
     }

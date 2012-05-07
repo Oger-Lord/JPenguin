@@ -66,7 +66,7 @@ public class Model implements Savable {
         this.modelClick = mc;
         
         attachmentNode = new Node();
-        gameApp.getRootNode().attachChild(attachmentNode);
+        gameApp.getNonreflectNode().attachChild(attachmentNode);
         
         boolean failed = false;
         
@@ -80,9 +80,11 @@ public class Model implements Savable {
        
             animControl = new MyAnimControl(model);
         
+          //  model.setQueueBucket(Bucket.Transparent);
+            
             model.setShadowMode(ShadowMode.CastAndReceive);
         
-          //  model.setQueueBucket(Bucket.Transparent);
+            
             
             model.setUserData("model",this);
             
@@ -108,13 +110,15 @@ public class Model implements Savable {
         fowm = (FogOfWarModels)gameApp.getGame().getFogOfWar().getEffect(FogOfWarModels.class);
         fowm.addModel(this);
         
-        
+        /*
              Sphere c = new Sphere(10,10,1.5f);
             Geometry geom = new Geometry("Cylinder", c);
             Material mat = new Material(gameApp.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
             mat.setColor("Color", ColorRGBA.Blue);
             geom.setMaterial(mat);
         attachmentNode.attachChild(geom);
+         * 
+         */
          }
         
         
@@ -146,7 +150,7 @@ public class Model implements Savable {
                        // mat.setTransparent(false);
                         g.setMaterial(mat);
                     }
-                }else if(m!=null)
+                }/*else if(m!=null)
                 {
                     if(m.getMaterialDef() != null)
                     {
@@ -157,6 +161,8 @@ public class Model implements Savable {
                         }
                     }
                 }
+                 * 
+                 */
             
             }
         }
@@ -206,8 +212,8 @@ public class Model implements Savable {
         {
             if(attachmentNode !=null && model != null)
             {
-                gameApp.getRootNode().detachChild(attachmentNode);
-                gameApp.getClickableNode().detachChild(model);
+                attachmentNode.removeFromParent();
+                model.removeFromParent();
                 
                 if(isBuilding && wasVisible)
                 {
@@ -226,7 +232,7 @@ public class Model implements Savable {
             wasVisible=true;
             if(attachmentNode !=null)
             {
-                gameApp.getRootNode().attachChild(attachmentNode);
+                gameApp.getNonreflectNode().attachChild(attachmentNode);
             }
             if(model != null)
             {
@@ -239,8 +245,8 @@ public class Model implements Savable {
     {
         if(model != null)
         {
-            gameApp.getRootNode().detachChild(attachmentNode);
-            gameApp.getClickableNode().detachChild(model);
+            attachmentNode.removeFromParent();
+            model.removeFromParent();
             attachmentNode.detachAllChildren();
             model.detachAllChildren();
 

@@ -81,6 +81,9 @@ public class GUI implements ScreenController {
                 gameApp.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
  
+        Properties property = new Properties();
+        property.setProperty("test", "hallo welt!");
+        nifty.setGlobalProperties(property);
         
         nifty.registerScreenController(this);//,new AbilityPanel(nifty));
         //nifty.registerScreenController(new ChatInputController());

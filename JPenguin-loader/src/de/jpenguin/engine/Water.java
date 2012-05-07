@@ -220,6 +220,18 @@ public class Water implements Savable{
         return firstPoint;
     }
     
+    public float getHeight(float x, float y)
+    {
+        for(int i=0;i<waterTypes.size();i++)
+        {
+            WaterType wt = waterTypes.get(i);
+            if(wt.isAtThisPosition(x, y, width, height))
+                return wt.getWaterHeight();
+                
+        }
+        return 0;
+    }
+    
     
     public void clear()
     {

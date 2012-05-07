@@ -41,7 +41,8 @@ public class Move extends Ability{
        // points.add(new Vector3f(order.getTargetX(),0,order.getTargetY()));
         unit.getModel().setAnimation("walk");
         
-        JumpPointSearch jps = new JumpPointSearch(game.getPathingMap(), PathingMap.MapGround,1,u.getX(), u.getY(), o.getTargetX(), o.getTargetY());
+
+        JumpPointSearch jps = new JumpPointSearch(game.getPathingMap(), 1,unit.getUnitType().getPathingType(),u.getX(), u.getY(), o.getTargetX(), o.getTargetY());
 
         if(jps.wayExists()==false)
         {
@@ -50,6 +51,9 @@ public class Move extends Ability{
         }
         
         points = jps.getVectorList();
+        
+        points.remove(0);
+       // points.add(new Vector3f(o.getTargetX(),0,o.getTargetY()));
         
         /*
         
