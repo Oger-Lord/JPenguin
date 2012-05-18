@@ -11,6 +11,7 @@ package de.jpenguin.gui.chat;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.asset.DesktopAssetManager;
 import com.jme3.asset.TextureKey;
+import de.jpenguin.gui.GUIPlugin;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.render.NiftyImage;
@@ -34,29 +35,22 @@ import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.controls.dynamic.TextCreator;
 import de.lessvoid.nifty.controls.dynamic.PanelCreator;
 
-public class ChatOutputController implements Controller{
+public class ChatOutputController  extends GUIPlugin{
     
    private Nifty nifty;
    private Screen screen;
    private Element parent;
     
    private ArrayList<Element> panels;
-    
-  public boolean inputEvent(final NiftyInputEvent inputEvent) {
-	return false;
-    }
-    
-    @Override
-    public void onFocus(final boolean getFocus) {
-    }
 
-      
-      public void bind(
+   public void bind(
  	final Nifty nifty,
 	final Screen screen,
 	final Element element,
 	final Properties parameter,
 	final Attributes controlDefinitionAttributes) {
+          
+       super.bind(nifty,screen,element,parameter,controlDefinitionAttributes);
           
           panels = new ArrayList();
           
@@ -66,7 +60,8 @@ public class ChatOutputController implements Controller{
       }
       
     
-    public void addRow(String text)
+    @Override
+    public void chatMessage(String text)
     {
         PanelCreator createPanel = new PanelCreator();
         createPanel.setChildLayout("horizontal");
@@ -87,14 +82,5 @@ public class ChatOutputController implements Controller{
         }
     }
     
-    
-    // @Override
-    public void init(final Properties parameter, final Attributes controlDefinitionAttributes) {
-    }
-
-  
-    public void onStartScreen() {
-   // setDifficulty("easy");
-  }
 
 }

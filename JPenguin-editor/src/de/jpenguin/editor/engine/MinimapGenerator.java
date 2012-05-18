@@ -23,11 +23,13 @@ import com.jme3.util.BufferUtils;
 import com.jme3.util.Screenshots;
 import com.jme3.app.state.*;
 import com.jme3.scene.Node;
+import de.jpenguin.engine.Water;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.List;
 import javax.imageio.ImageIO;
 
 
@@ -46,15 +48,18 @@ public class MinimapGenerator extends AbstractAppState implements SceneProcessor
     private int width;
     private int height;
     
-    private Application app;
+    private EditorApplication app;
+    
+    private Water water;
 
     //Import: only chance to set resolution, later only upscale
-    public MinimapGenerator(Application app,TerrainQuad terrain,Node n,int width,int height, File f){
+    public MinimapGenerator(EditorApplication app,TerrainQuad terrain,Water water,Node n,int width,int height, File f){
         
         this.app=app;
         this.width=width;
         this.height=height;
         this.file=f;
+        this.water=water;
         
         int largest=width;
         if(height > width)
@@ -67,7 +72,10 @@ public class MinimapGenerator extends AbstractAppState implements SceneProcessor
         offView = app.getRenderManager().createPreView("Offscreen View", offCamera);
         offView.setClearFlags(true, true, true);
         offView.setBackgroundColor(new ColorRGBA(0,0,0,0));
-
+        offView.addProcessor(water.getFilterPostProcessor());
+        
+        
+        
         // create offscreen framebuffer
         offBuffer = new FrameBuffer(width, height, 1);
 
@@ -95,10 +103,15 @@ public class MinimapGenerator extends AbstractAppState implements SceneProcessor
         offView.setOutputFrameBuffer(offBuffer);
         
         offView.attachScene(terrain);
+        
+        water.setRootNode(terrain);
+        
         if(n != null)
         {
             offView.attachScene(n);
         }
+    //    offView.addProcessor(this);
+        
         
         this.renderer = app.getRenderManager().getRenderer();
         
@@ -137,6 +150,9 @@ public class MinimapGenerator extends AbstractAppState implements SceneProcessor
     public void postFrame(FrameBuffer out) {
          if(madeScreen==false)
          {
+             
+            water.setRootNode(app.getRootNode());
+             
             madeScreen = true;
 
             bi = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);

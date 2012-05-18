@@ -96,13 +96,13 @@ public class WaterManager extends AbstractAppState{
     
     public void changeHeight(Vector3f loc, float radius)
     {
-        water.changeTerrainHeight(loc, radius);
+        getWater().changeTerrainHeight(loc, radius);
          
     }
     
     public void hide(boolean b)
     {
-        water.enableEffect(b);
+        getWater().enableEffect(b);
     }
     
         
@@ -145,9 +145,9 @@ public class WaterManager extends AbstractAppState{
                     {
                         if(tools.getWaterBrushType().equals("add"))
                         {
-                            water.drawWaterType(waterId, intersection.x, intersection.z,(float)tools.getWaterBrushSize()/2, true);
+                            getWater().drawWaterType(waterId, intersection.x, intersection.z,(float)tools.getWaterBrushSize()/2, true);
                         }else{
-                            water.drawWaterType(waterId, intersection.x, intersection.z,(float)tools.getWaterBrushSize()/2, false);
+                            getWater().drawWaterType(waterId, intersection.x, intersection.z,(float)tools.getWaterBrushSize()/2, false);
                         }
                     }
                 }   
@@ -158,26 +158,26 @@ public class WaterManager extends AbstractAppState{
     
     public void newWater()
     {
-        water.clear();
+        getWater().clear();
         
         int size=editorApp.getTerrainManager().getTerrain().getTerrainSize()-1;
         
-        water.addWaterType(new WaterType("Test Water",editorApp.getRootNode(),size,0));
+        getWater().addWaterType(new WaterType("Test Water",editorApp.getRootNode(),size,0));
         
-        tools.setWaterList(water.getWaterNames());
+        tools.setWaterList(getWater().getWaterNames());
     }
     
     public void save()
     {
-        Loader.save(Editor.getMapPath(), water, "water", false);
+        Loader.save(Editor.getMapPath(), getWater(), "water", false);
     }
     
     public void load()
     {
         water =Loader.load(editorApp.getAssetManager(), Editor.getMap(), "water", false, Water.class);
-        if(water != null)
+        if(getWater() != null)
         {
-            water.init(editorApp, editorApp.getTerrainManager().getTerrain(), editorApp.getPathingManager().getPathingMap(), editorApp.getRootNode());
+            getWater().init(editorApp, editorApp.getTerrainManager().getTerrain(), editorApp.getPathingManager().getPathingMap(), editorApp.getRootNode());
             
             
            // water.getWaterFilter().setEnabledMap(editorApp.getAssetManager().loadTexture("Textures/test.png"));
@@ -185,11 +185,18 @@ public class WaterManager extends AbstractAppState{
             int size=editorApp.getTerrainManager().getTerrain().getTerrainSize()-1;
             
             water = new Water(size,size);
-            water.init(editorApp, editorApp.getTerrainManager().getTerrain(), editorApp.getPathingManager().getPathingMap(), editorApp.getRootNode());
+            getWater().init(editorApp, editorApp.getTerrainManager().getTerrain(), editorApp.getPathingManager().getPathingMap(), editorApp.getRootNode());
             
-            water.addWaterType(new WaterType("Test Water",editorApp.getRootNode(),size,0));
+            getWater().addWaterType(new WaterType("Test Water",editorApp.getRootNode(),size,0));
         }
-        tools.setWaterList(water.getWaterNames());
+        tools.setWaterList(getWater().getWaterNames());
+    }
+
+    /**
+     * @return the water
+     */
+    public Water getWater() {
+        return water;
     }
     
 }

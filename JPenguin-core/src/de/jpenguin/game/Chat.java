@@ -33,7 +33,7 @@ public class Chat {
         {
             game.addPlayerCommandChat(new PlayerCommandChat(game.getControllerPlayer(),s));
         }else{
-            game.getGameApplication().getGUI().getChatOutput().addRow(s);
+            game.getGameApplication().getGUI().chatMessage(s);
         }
     }
     

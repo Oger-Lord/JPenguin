@@ -261,6 +261,12 @@ public class Water implements Savable{
     }
     
     
+    public FilterPostProcessor getFilterPostProcessor()
+    {
+        return postWater;
+    }
+    
+    
     public String[] getWaterNames()
     {
         String[] s= new String[waterTypes.size()];

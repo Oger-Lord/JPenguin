@@ -2,6 +2,6 @@
 <de.jpenguin.type.basics.TypeList savable_versions='0'>
  <myclass attackSpeed='0.0' class='de.jpenguin.type.BuildingType' life='0.0' movementSpeed='0.0' savable_versions='0, 0' size='0.0' typeId=''/>
 <instances size='1'>
-      <de.jpenguin.type.BuildingType name='Tower' model='Models/Tower/Tower.j3o' attackSpeed='' attackDamage='' attackDistance='' attackMissile='' life='100' size='2.5' attackSound='' deathSound='' armor='1' hpRegeneration='' mpRegeneration='' mana='' abilities='' sightRadius='' selectionSize='' pathingSize='2' typeId='tower'/>
+      <de.jpenguin.type.BuildingType name='Tower' model='Models/Tower/Tower.j3o' attackSpeed='' attackDamage='' attackDistance='' attackMissile='' life='100' size='2.5' attackSound='' deathSound='' armor='1' hpRegeneration='' mpRegeneration='' mana='' abilities='' sightRadius='' selectionSize='' pathingSize='2' pathingType='' typeId='tower'/>
  </instances>
 </de.jpenguin.type.basics.TypeList>

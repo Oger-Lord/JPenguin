@@ -51,6 +51,7 @@ public class Selection {
         
         mat.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         mat.getAdditionalRenderState().setAlphaFallOff(0.9f);
+         mat.getAdditionalRenderState().setAlphaTest(true);
     //    mat.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Back);
         
         model.setMaterial(mat);

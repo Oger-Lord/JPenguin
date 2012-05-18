@@ -46,47 +46,40 @@ import de.jpenguin.unit.Unit;
 import de.jpenguin.type.AbilityType;
 import de.jpenguin.type.UnitType;
 
-import de.lessvoid.nifty.controls.dynamic.attributes.ControlEffectOnHoverAttributes;
-import de.lessvoid.nifty.effects.EffectEventId;
-import de.lessvoid.nifty.effects.Effect;
 
-import de.lessvoid.nifty.builder.HoverEffectBuilder;
-
-import java.util.LinkedList;
-import de.lessvoid.nifty.effects.EffectProperties;
-import de.lessvoid.nifty.tools.TimeProvider;
 /**
  *
  * @author Karsten
  */
-public class AbilityPanel implements Controller {
+public class AbilityPanel extends GUIPlugin {
     
-    private Element panel;
-    private Nifty nifty;
-    private Screen screen;
-    private Game game;
     private AbilityImage images[];
     private AbilityType abilities[];
     
     private HintController hintController;
     
-    public static AbilityPanel getAbilityPanel(Game game,Nifty nifty, Screen screen)
+    public static void createAbilityPanel(Nifty nifty, Screen screen)
     {
          CustomControlCreator createMultiplayerPanel = new CustomControlCreator("myAbilityPanel", "abilityPanel");
          createMultiplayerPanel.create(nifty, screen, screen.findElementByName("box-ability"));
-        
+    }
+    
+    public void bind(
+ 	final Nifty nifty,
+	final Screen screen,
+	final Element element,
+	final Properties parameter,
+	final Attributes controlDefinitionAttributes) {
           
-         Element e =nifty.getScreen("start").findElementByName("myAbilityPanel");
-         AbilityPanel ap = (AbilityPanel)e.getAttachedInputControl().getController();
-         ap.game=game;
-         
-         ap.images = new AbilityImage[12];
-         ap.abilities = new AbilityType[12];
+        super.bind(nifty,screen,element,parameter,controlDefinitionAttributes);
+        
+         images = new AbilityImage[12];
+         abilities = new AbilityType[12];
          for(int i=0;i<12;i++)
          {
-            ap.images[i] = new AbilityImage(game);
+            images[i] = new AbilityImage(game);
             Texture2D texture = new Texture2D(512, 512, Format.Depth);
-            texture.setImage(ap.images[i]);
+            texture.setImage(images[i]);
              
           //  ap.elements[i] = nifty.getScreen("start").findElementByName("ability"+i);
             ImageRenderer mm = nifty.getScreen("start").findElementByName("ability"+i).getRenderer(ImageRenderer.class);
@@ -95,15 +88,9 @@ public class AbilityPanel implements Controller {
             mm.setImage(img); 
          }
          
-           ap.hintController=screen.findControl("hintPanel", HintController.class);
-           
-         return ap;
-    }
-    
+         hintController=screen.findControl("hintPanel", HintController.class);
+      }
 
-    public boolean inputEvent(final NiftyInputEvent inputEvent) {
-	return false;
-}
 
     public void click(String s)
     {
@@ -113,37 +100,29 @@ public class AbilityPanel implements Controller {
         System.out.println("Affen werfen mit Kot " + abilities[i].getName());
     }
     
-    public void loadUnit(Unit u)
+    public void selectUnit(Unit u)
     {
-       ArrayList<AbilityType> list = u.getAbilities();
-
-       for(int i=0;i<12;i++)
+       if(u != null)
        {
-            abilities[i] = null;
-            hintController.removeKey("ability"+i);
-        }
-        
-        for(int i=0;i<list.size();i++)
-        {
-            AbilityType at = list.get(i);
-            images[at.getPosition()].setImage(at.getIcon());
-            abilities[at.getPosition()] = at;
-            
-            hintController.putKey("ability"+at.getPosition(),at.getName() + "\n" + at.getDescription());
-            /*
-            HintEffect hintEffect = new HintEffect();
-            Properties properties = new Properties();
-            properties.put( "hintText" , "This is a test!" );
-            Effect effect = new Effect( nifty, false, false, false, "", "", "", true, EffectEventId.onHover);
-            effect.init( elements[at.getPosition()], hintEffect, new EffectProperties(properties), new TimeProvider(), new LinkedList<Object>() );
+           ArrayList<AbilityType> list = u.getAbilities();
 
-            elements[at.getPosition()].registerEffect( EffectEventId.onHover, effect );
-            effect.enableInfinite();
-             * 
-             */
+           for(int i=0;i<12;i++)
+           {
+                abilities[i] = null;
+                hintController.removeKey("ability"+i);
+            }
 
-             
-        }
+            for(int i=0;i<list.size();i++)
+            {
+                AbilityType at = list.get(i);
+                images[at.getPosition()].setImage(at.getIcon());
+                abilities[at.getPosition()] = at;
+
+                hintController.putKey("ability"+at.getPosition(),at.getName() + "\n" + at.getDescription());
+            }
+       }else{
+           clear();
+       }
     }
 
     
@@ -155,31 +134,6 @@ public class AbilityPanel implements Controller {
             abilities[i] = null;
         }
     }
-    
-    @Override
-	public void onFocus(final boolean getFocus) {
-	}
-
-      
-      public void bind(
- 	final Nifty nifty,
-	final Screen screen,
-	final Element element,
-	final Properties parameter,
-	final Attributes controlDefinitionAttributes) {
-          
-           System.out.println("123 " + nifty.getGlobalProperties().get("test"));
-      }
-      
-      // @Override
-    public void init(final Properties parameter, final Attributes controlDefinitionAttributes) {
-       
-    }
-
-  
-    public void onStartScreen() {
-   // setDifficulty("easy");
-  }
     
 
 

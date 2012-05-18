@@ -244,7 +244,7 @@ public class EditorApplication extends SimpleApplication {
                 objectManager.save();
                 pathingManager.save();
                 waterManager.save();
-                new MinimapGenerator(EditorApplication.this, terrainManager.getTerrain(),objectManager.getNode(),512,512,new File(Editor.getMapPath()+"minimap.png"));
+                new MinimapGenerator(EditorApplication.this, terrainManager.getTerrain(),waterManager.getWater(),objectManager.getNode(),512,512,new File(Editor.getMapPath()+"minimap.png"));
                           
                   return null;
               }

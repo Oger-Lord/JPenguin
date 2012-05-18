@@ -26,25 +26,16 @@ import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.input.mapping.DefaultInputMapping;
 
 import de.jpenguin.game.Game;
+import de.jpenguin.gui.GUIPlugin;
 import de.jpenguin.player.PlayerCommandChat;
 
-public class ChatInputController implements Controller{
-    
-   
+
+public class ChatInputController extends GUIPlugin{
     
   private TextField inputField;
   private Element inputLayer;
   private boolean hide=true;
-  private Game game;
 
-  
-    public void onStartScreen() {
-  }
-    
-    public void setGame(Game game)
-    {
-        this.game=game;
-    }
     
      public void deselection()
      {
@@ -55,6 +46,9 @@ public class ChatInputController implements Controller{
 
     @Override
     public void bind(Nifty nifty, Screen screen, Element element, Properties parameter, Attributes controlDefinitionAttributes) {
+ 
+        super.bind(nifty,screen,element,parameter,controlDefinitionAttributes);
+        
         inputField = screen.findNiftyControl("chatinput", TextField.class);
         inputLayer = element;
         

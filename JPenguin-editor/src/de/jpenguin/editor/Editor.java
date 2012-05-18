@@ -1,6 +1,6 @@
 /*
  * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in the editor.  gui builder 1.12
  */
 package de.jpenguin.editor;
 

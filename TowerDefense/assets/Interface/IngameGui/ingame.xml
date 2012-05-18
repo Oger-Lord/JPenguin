@@ -47,7 +47,7 @@
 
 	</panel>
 
-        <panel id="bottom" childLayout="horizontal" height="25%" width="100%">
+        <panel id="bottom" childLayout="horizontal" height="25%" width="100%" controller="de.jpenguin.gui.PortraitPanel">
 
 	   <panel id="box-minimap" height="100%" width="20%" align="left" valign="bottom" backgroundColor="#000000" childLayout="center" visibleToMouse="true">
 	   </panel>
